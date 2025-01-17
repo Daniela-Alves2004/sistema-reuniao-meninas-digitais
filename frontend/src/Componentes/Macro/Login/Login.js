@@ -26,8 +26,9 @@ const Login = () => {
           </div>
         </form>
         <p className='esqueceu-senha'>Esqueceu a senha?</p>
+        <p className='saiba-mais'>Clique aqui para saber mais sobre o nosso projeto!</p>
+    
       </div>
-      <p className='saiba-mais'>Clique aqui para saber mais sobre o nosso projeto!</p>
     </div>
   );
 };
