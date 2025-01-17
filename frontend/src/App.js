@@ -1,15 +1,13 @@
+//import Teste from './componentes/macro/teste/teste';
+import Login from "./Componentes/Macro/Login/Login";
 function App() {
 
   return (
+    <Login />
 
-    <div className="App">
-
-      <h1>Hello, React!</h1>
-
-    </div>
 
   );
-  
+
 }
 
 export default App;
