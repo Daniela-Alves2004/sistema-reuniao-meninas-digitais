@@ -9,9 +9,9 @@ exports.registerUser = async (req, res) => {
   
   try {
 
-    const { primeiro_nome, ultimo_nome, email, senha, papel, telefone, id_setor } = req.body;
+    const { ra, primeiro_nome, ultimo_nome, email, senha, papel, telefone, id_setor } = req.body;
 
-    const user = await User.create({ primeiro_nome, ultimo_nome, email, senha, papel, telefone, id_setor });
+    const user = await User.create({ ra, primeiro_nome, ultimo_nome, email, senha, papel, telefone, id_setor });
 
     res.status(200).json(
 
@@ -36,14 +36,16 @@ exports.registerUser = async (req, res) => {
 // Função para um usuário fazer login
 exports.loginUser = async (req, res) => {
 
-  const { email, senha } = req.body;
+  const { ra, senha } = req.body;
 
   try {
 
-    const user = await User.findOne({ where: { email, senha } });
+    const user = await User.findOne({ where: { ra, senha } });
 
     if (!user) {
+
       return res.status(401).json({ error: 'Credênciais inválidas' });
+
 
     }
 
