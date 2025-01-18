@@ -16,9 +16,9 @@ import axios from 'axios';
 const Home = () => {
   const [date, setDate] = useState(new Date());
   const [showPopup, setShowPopup] = useState(false);
-  const [showDetailsPopup, setShowDetailsPopup] = useState(false);  
+  const [showDetailsPopup, setShowDetailsPopup] = useState(false);
   const [meetingData, setMeetingData] = useState(null);
-  const [selectedMeeting, setSelectedMeeting] = useState(null); 
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [error, setError] = useState(null);
 
   const handleDateChange = async (newDate) => {
@@ -59,7 +59,7 @@ const Home = () => {
 
     setShowPopup(false);
 
-    setShowDetailsPopup(false); 
+    setShowDetailsPopup(false);
 
   };
 
@@ -67,9 +67,9 @@ const Home = () => {
 
     setSelectedMeeting(meeting);
 
-    setShowPopup(false);  
+    setShowPopup(false);
 
-    setShowDetailsPopup(true);  
+    setShowDetailsPopup(true);
 
     try {
 
@@ -83,7 +83,7 @@ const Home = () => {
 
         ...prevState,
 
-        location: response.data.location,  
+        location: response.data.location,
 
       }));
 
@@ -95,7 +95,7 @@ const Home = () => {
 
         ...prevState,
 
-        location: null,  
+        location: null,
 
       }));
 
@@ -152,7 +152,7 @@ const Home = () => {
 
                     key={index}
 
-                    onClick={() => openMeetingDetails(meeting)} 
+                    onClick={() => openMeetingDetails(meeting)}
 
                     style={{
                       listStyleType: 'none',
@@ -186,46 +186,59 @@ const Home = () => {
 
       </Dialog>
 
-      <Dialog open={showDetailsPopup} onClose={closePopup} 
-      
-      
-      sx={{
+      <Dialog open={showDetailsPopup} onClose={closePopup}
 
-        '& .MuiDialogContent-root': {
-          background: 'linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%)',
-          color: 'white',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          width: '600px',
-          height: '800px',
-        }
+        sx={{
 
-      }}>
+          '& .MuiDialogContent-root': {
+            background: 'linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%)',
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            width: '600px',
+            height: '800px',
+          }
+
+        }}>
 
         <DialogContent>
 
           {selectedMeeting ? (
-          
-            <div style={{ width: '100%' }}>
-             
-              <p><strong>Reunião:</strong> {selectedMeeting.pauta}</p>
-             
-              <p><strong>Data:</strong> {selectedMeeting.data_reuniao}</p>
-              
-              <p><strong>Descrição:</strong> {selectedMeeting.descricao || 'Nenhuma descrição disponível.'}</p>
-             
+
+            <div style={{
+
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              justifyContent: 'space-around',
+
+            }}>
+
+              <p><strong>Pauta:</strong> {selectedMeeting.pauta}</p>
+
               {selectedMeeting.location ? (
-              
-                <div> 
-                 
-                  <p><strong>Local:</strong> {selectedMeeting.location.sala}</p>
-                  
+
+                <div>
+
+                  {selectedMeeting.location.sala ? (
+                    <p><strong>Local:</strong> {selectedMeeting.location.sala}</p>
+                  ) : (
+                    <p><strong>Local:</strong> Sala não disponível.</p>
+                  )}
+
                   <p><strong>Tipo:</strong> {selectedMeeting.location.tipo}</p>
-                  
-                  <p><strong>Link:</strong> <a href={selectedMeeting.location.link} target="_blank" rel="noopener noreferrer">Acessar local</a></p>
-               
+
+                  {selectedMeeting.location.link ? (
+                    <p><strong>Link:</strong> <a href={selectedMeeting.location.link} target="_blank" rel="noopener noreferrer">{selectedMeeting.location.link}</a></p>
+                  ) : (
+                    <p><strong>Link:</strong> Link não disponível.</p>
+                  )}
+
                 </div>
 
               ) : (

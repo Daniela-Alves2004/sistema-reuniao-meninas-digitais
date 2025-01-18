@@ -84,8 +84,18 @@ INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.goo
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K002');
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K003');
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-18\', '2025-01-17\', 'Reunião de Marketing\', 1);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-19\', '2025-01-18\', 'Reunião de Gestão de Pessoas\', 2);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-20\', '2025-01-18\', 'Reunião de Conteúdo\', 3);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-21\', '2025-01-18\', 'Reunião de Instrutores\', 4);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-22\', '2025-01-18\', 'Reunião de Professores\', 5);
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-18', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
+
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-19', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
+
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-20', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
+
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-21', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
+
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-22', '2025-01-22', 'Inteligência Artificial e o Futuro da Educação: Desafios e Oportunidades no Ensino Personalizado', 5);
+
