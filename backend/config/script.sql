@@ -66,18 +66,26 @@ CREATE TABLE "Convite"(
     FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("id")
 );
 
+-- Insira os dados iniciais
+
 INSERT INTO "Setor" ("nome") VALUES ('Marketing');
+INSERT INTO "Setor" ("nome") VALUES ('Gestão de Pessoas');
+INSERT INTO "Setor" ("nome") VALUES ('Conteúdo');
+INSERT INTO "Setor" ("nome") VALUES ('Instrutores');
+INSERT INTO "Setor" ("nome") VALUES ('Professores');
 
--- Insira 10 reunioes com datas diferentes
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2465710, 'Brena', 'Santos', 'Lider', 'brenas@gmail.com', '11999999999', 'brena123', 1);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (123457, 'João', 'Botter', 'Membro', 'joao@gmail.com', '11999999999', '123456', 2);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (123458, 'Rosangela', 'Marquesone', 'Professora', 'rosagenla@gmail.com', '11999999999', '123456', 5);
 
-INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala 1');
-INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala 2');
-INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala 3');
+INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-123', null);
+INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-321', null);
+INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-231', null);
+INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K002');
+INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K003');
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-18', '2025-01-01', 'Pauta 11', 1);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-20', '2025-01-01', 'Pauta 12', 2);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-22', '2025-01-01', 'Pauta 13', 3);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-25', '2025-01-01', 'Pauta 14', 1);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-28', '2025-01-01', 'Pauta 15', 2);
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-30', '2025-01-01', 'Pauta 16', 3);
-
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-18\', '2025-01-17\', 'Reunião de Marketing\', 1);
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-19\', '2025-01-18\', 'Reunião de Gestão de Pessoas\', 2);
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-20\', '2025-01-18\', 'Reunião de Conteúdo\', 3);
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-21\', '2025-01-18\', 'Reunião de Instrutores\', 4);
+INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") VALUES ('2025-01-22\', '2025-01-18\', 'Reunião de Professores\', 5);
