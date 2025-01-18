@@ -1,13 +1,30 @@
-//import Teste from './componentes/macro/teste/teste';
-import Login from "./Componentes/Macro/Login/Login";
+import React from 'react';
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+import Login from './Componentes/Macro/Login/Login'; 
+
+import Home from './Componentes/Macro/Home/Home';
+
+import './App.css'
+
 function App() {
 
   return (
-    <Login />
+    <Router>
+      <Routes>
+        {/* Rota para a página de login */}
+        <Route path="/login" element={<Login />} />
 
+        {/* Rota para a página home */}
+        <Route path="/home" element={<Home />} />
 
+        {/* Defina a rota padrão como login */}
+        <Route path="*" element={<Navigate to="/login" />} />
+
+      </Routes>
+    </Router>
   );
-
 }
 
 export default App;

@@ -9,3 +9,9 @@
     align-items: center;
     justify-content: center;
 }
+
+.btEntrar:hover, .btCadastrar:hover{
+    background-color: #91327A;
+    color: white;
+    cursor: pointer;
+}

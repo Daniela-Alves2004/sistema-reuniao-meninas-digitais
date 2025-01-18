@@ -16,6 +16,14 @@ User.init({
 
     },
 
+    ra: {
+
+        type: DataTypes.INTEGER,
+
+        allowNull: false
+
+    },
+
     primeiro_nome: {
 
         type: DataTypes.STRING,
@@ -84,7 +92,7 @@ User.init({
 
     sequelize, // Conexão com o banco de dados
   
-    modelName: 'Usuario', // Nome do modelo
+    modelName: 'User', // Nome do modelo
 
     tableName: 'Usuario', // Evita pluralização automática para "Usuarios"
   
