@@ -5,6 +5,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const userRoutes = require('./routes/userRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
 const locationRoutes = require('./routes/locationRoutes');
+const tokenRoutes = require('./routes/tokenRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors({
 app.use('/api/users', userRoutes); // Rota para usuários
 app.use('/api/meetings', meetingRoutes); // Rota para reuniões
 app.use('/api/locations', locationRoutes); // Rota para locais
+app.use('/api/token', tokenRoutes); // Rota para tokens
 
 app.use('/', createProxyMiddleware({ target: 'http://localhost:3001', changeOrigin: true })); // Proxy para o frontend
 

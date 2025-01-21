@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
             try {
 
-                const response = await fetch(`http://localhost:3000/validateToken`, {
+                const response = await fetch(`http://localhost:3000/api/token/validate`, {
 
                     method: 'GET',
 
