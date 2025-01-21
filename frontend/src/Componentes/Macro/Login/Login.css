@@ -1,33 +1,27 @@
 .container-wrapper {
-
   display: flex;
-  align-items: center;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
   background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
   font-family: "Inter", serif;
-
+  padding: 20px;
 }
 
 .container-logo {
-
   display: flex;
   justify-content: center;
-
 }
 
 .container-logo img {
-  display: flex;
   width: 50%;
   height: auto;
-
 }
 
 .container-login {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: transparent;
   border: 5px solid white;
@@ -38,28 +32,23 @@
 .esqueceu-senha {
   color: white;
   font-size: 10px;
-  margin: 30px 0;
+  margin: 10px 0;
 }
 
 form {
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
-  height: 60%;
   gap: 20px;
-
 }
 
 .container-dados {
-
   display: flex;
   flex-direction: column;
   gap: 10%;
   width: 100%;
-
 }
 
 .container-dados input {
@@ -68,7 +57,7 @@ form {
   border: 3px solid white;
   padding: 10px;
   background-color: transparent;
-  color:white
+  color: white;
 }
 
 .container-dados input:focus {
@@ -84,7 +73,6 @@ form {
 
 .container-botoes {
   width: 100%;
-  height: 40%;
   display: flex;
   flex-direction: column;
   gap: 10%;
@@ -97,3 +85,99 @@ form {
   margin: 10px 0;
 }
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .container-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .container-logo img {
+    width: 40%;
+  }
+  .container-login {
+    width: 90%;
+    padding: 20px;
+    justify-content: flex-start;
+  }
+  .container-dados input {
+    width: 100%;
+  }
+  .container-botoes {
+    margin: 25px 0;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .container-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .container-logo img {
+    width: 40%;
+  }
+  .container-login {
+    width: 85%;
+    padding: 25px;
+  }
+  .container-dados input {
+    width: 100%;
+  }
+  .container-botoes {
+    margin: 20px 0;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .container-wrapper {
+    flex-direction: row;
+    padding: 30px;
+  }
+  .container-logo img {
+    width: 60%;
+  }
+  .container-login {
+    width: 80%;
+    padding: 30px;
+  }
+  .container-dados input {
+    width: 100%;
+  }
+  .container-botoes {
+    justify-content: space-around;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .container-wrapper {
+    flex-direction: row;
+    padding: 40px;
+  }
+  .container-logo img {
+    width: 50%;
+  }
+  .container-login {
+    width: 70%;
+    padding: 40px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .container-wrapper {
+    flex-direction: row;
+    padding: 50px;
+  }
+  .container-logo img {
+    width: 40%;
+  }
+  .container-login {
+    width: 60%;
+    padding: 50px;
+  }
+  .container-botoes {
+    justify-content: space-between;
+  }
+}
