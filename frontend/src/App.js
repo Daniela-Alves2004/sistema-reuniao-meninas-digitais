@@ -1,30 +1,33 @@
 import React from 'react';
-
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
-import Login from './Componentes/Macro/Login/Login'; 
-
-import Home from './Componentes/Macro/Home/Home';
-
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Login from './componentes/macro/Login/Login';
+import Home from './componentes/macro/Home/Home';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './componentes/ProtectedRoute'; 
 
 function App() {
 
-  return (
-    <Router>
-      <Routes>
-        {/* Rota para a página de login */}
-        <Route path="/login" element={<Login />} />
+    return (
 
-        {/* Rota para a página home */}
-        <Route path="/home" element={<Home />} />
+        <AuthProvider>
 
-        {/* Defina a rota padrão como login */}
-        <Route path="*" element={<Navigate to="/login" />} />
+            <Router>
 
-      </Routes>
-    </Router>
-  );
+                <Routes>
+
+                    <Route path="/" element={<Login />} />
+
+                    <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
+
+                </Routes>
+
+            </Router>
+
+        </AuthProvider>
+
+    );
+
 }
 
 export default App;

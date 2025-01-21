@@ -1,49 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import logoBranca from '../../../assets/logos/logoBranca.png';
-import Botao from '../../Micro/Botao/Botao';
+import Botao from '../../micro/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import { AuthContext } from '../../../contexts/AuthContext'; 
+require('./Login.css');
 
 const Login = () => {
-
   const [registroAluno, setRegistroAluno] = useState('');
-  
   const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
 
-  const navigate = useNavigate();  // Hook para navegar entre páginas
+  const { setIsLoggedIn } = useContext(AuthContext); 
 
   const handleLogin = async (event) => {
-
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      const response = await axios.post(`http://localhost:3000/api/users/login`, {
         ra: registroAluno,
         senha: senha,
+      }, {
+        withCredentials: true, 
       });
 
-      console.log('Resposta do login:', response.mensagem);
+      console.log('Resposta do login:', response.data.message);
 
-      // Exibe o toast de sucesso
       toast.success('Login bem-sucedido!', {
-        autoClose: 1000, // Tempo para fechar automaticamente
+
+        autoClose: 1000,
+
       });
 
-      // Redireciona para a página Home após um pequeno delay
+      setIsLoggedIn(true);
+
       setTimeout(() => {
 
         navigate('/home');
-
-      }, 3000); // Aguarda 3 segundos antes de redirecionar
+        
+      }, 1000);
 
     } catch (error) {
-      // Exibe o toast de erro
       toast.error('Erro no login. Verifique suas credenciais.', {
         autoClose: 3000,
       });
+
       console.error('Erro no login:', error);
     }
   };
@@ -68,6 +71,7 @@ const Login = () => {
               value={registroAluno}
               onChange={(e) => setRegistroAluno(e.target.value)}
             />
+
             <label htmlFor="senha">Senha:</label>
             <input
               type="password"

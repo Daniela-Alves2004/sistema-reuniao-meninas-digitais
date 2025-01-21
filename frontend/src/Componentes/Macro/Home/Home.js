@@ -3,7 +3,7 @@ import 'react-calendar/dist/Calendar.css';
 import './Home.css';
 
 // Componente Header
-import Header from '../../Micro/Header/Header';
+import Header from '../../micro/Header/Header';
 
 // Importando a biblioteca de calendário
 import Calendar from 'react-calendar';
@@ -124,8 +124,8 @@ const Home = () => {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          width: '600px',
-          height: '800px',
+          width: '500px',
+          height: '600px',
         }
 
       }}>
@@ -197,8 +197,8 @@ const Home = () => {
             flexDirection: 'column',
             alignItems: 'center',
             textAlign: 'center',
-            width: '600px',
-            height: '800px',
+            width: '500px',
+            height: '600px',
           }
 
         }}>
@@ -214,8 +214,9 @@ const Home = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              padding: 20,
               textAlign: 'center',
-              justifyContent: 'space-around',
+              justifyContent: 'space-between',
 
             }}>
 
