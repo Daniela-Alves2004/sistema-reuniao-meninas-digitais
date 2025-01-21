@@ -6,11 +6,15 @@
     box-sizing: border-box;
 }
 
-#root{
+html, body {
+    height: 100%;
+}
 
+#root {
     display: flex;
     justify-content: center;
-    height: 100vh;
+    align-items: center;
+    min-height: 100vh;
     background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
-
+    background-size: cover;
 }
