@@ -2,9 +2,9 @@ import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import Login from './Componentes/Macro/Login/Login'; 
+import Login from './componentes/macro/Login/Login'; 
 
-import Home from './Componentes/Macro/Home/Home';
+import Home from './componentes/macro/Home/Home';
 
 import './App.css'
 
