@@ -8,10 +8,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
 }
 
 .btEntrar:hover, .btCadastrar:hover{
     background-color: #91327A;
     color: white;
     cursor: pointer;
+}
+@media only screen and (min-width: 768px) {
+    .btEntrar, .btCadastrar{
+        margin: 0 ;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .btEntrar, .btCadastrar{
+        font-size: 18px;
+
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .btEntrar, .btCadastrar{
+        font-size: 20px;
+
+    }
+}
+@media only screen and (min-width: 1366px) {
+    .btEntrar, .btCadastrar{
+        font-size: 22px;
+
+    }
+}
+@media only screen and (max-width: 1920px) {
+    .btEntrar, .btCadastrar{
+        font-size: 24px;
+
+    }
 }

@@ -1,99 +1,643 @@
-.container-wrapper {
 
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: center;
-  background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
-  font-family: "Inter", serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@media only screen and (max-width: 600px) {
+  .container-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
+    font-family: "Inter", serif;
+  }
+  
+  .container-logo {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .container-logo img {
+    display: flex;
+    width: 50%;
+    height: auto;
+  
+  }
+  
+  .container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 45%;
+    height: 60%;
+  }
+  
+  .esqueceu-senha {
+    color: white;
+    margin-right: 10%;
+    font-size: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 100%;
+    height: 60%;
+    gap: 20px;
+  
+  }
+  
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+  
+  }
+  
+  .container-dados input {
+    width: 100%;
+    height: 20%;
+    border-radius: 5px;
+    border: 3px solid white;
+    padding: 10px;
+    background-color: transparent;
+  }
+  
+  .container-dados label {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .container-botoes {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+  }
+  
+  .saiba-mais {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 40%;
+  }
+  
+}
+
+
+@media only screen and (min-width: 600px) {
+  .container-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
+    font-family: "Inter", serif;
+  }
+  
+  .container-logo {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .container-logo img {
+    display: flex;
+    width: 50%;
+    height: auto;
+  
+  }
+  
+  .container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 45%;
+    height: 60%;
+  }
+  
+  .esqueceu-senha {
+    color: white;
+    margin-right: 10%;
+    margin-top: 10%;
+    font-size: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 100%;
+    height: 60%;
+    gap: 20px;
+  
+  }
+  
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+  
+  }
+  
+  .container-dados input {
+    width: 100%;
+    height: 20%;
+    border-radius: 5px;
+    border: 3px solid white;
+    padding: 10px;
+    background-color: transparent;
+  }
+  
+  .container-dados label {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .container-botoes {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+  }
+  
+  .saiba-mais {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 40%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container-login {
+    height: 50%;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 2%;
+    width: 35%;
+    justify-content: space-between;
+  }
+
+  form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 28%;
+
+  }
+
+  .container-dados label {
+    font-size: 17px;
+  }
+
+  .container-logo {
+    width: 45%;
+    height: 54%;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .esqueceu-senha {
+    font-size: 15px;
+    margin-right: 2%;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 2%;
+    right: 18%;
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 45%;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 2%;
+    width: 35%;
+  }
+
+  form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 28%;
+
+  }
+
+  .container-dados label {
+    font-size: 24px;
+  }
+
+  .container-logo {
+    width: 44%;
+    height: 50%;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 10%;
+  }
+
+  .esqueceu-senha {
+    font-size: 16px;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 2%;
+    font-size: 24px;
+  }
 
 }
 
-.container-logo {
+@media only screen and (min-width: 1200px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 
-  display: flex;
-  justify-content: center;
+  .container-login {
+    height: 45%;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 1%;
+    width: 33%;
+  }
+
+  form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 28%;
+
+  }
+
+  .container-dados label {
+    font-size: 24px;
+  }
+
+  .container-logo {
+    width: 500px;
+    height: 500px;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .esqueceu-senha {
+    font-size: 16px;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 2%;
+    left: 30%;
+    font-size: 24px;
+  }
 
 }
+@media only screen and (min-width: 1366px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 
-.container-logo img {
-  display: flex;
-  width: 50%;
-  height: auto;
+  .container-login {
+    height: 33%;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 1%;
+    width: 33%;
+  }
+
+  form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 30%;
+
+  }
+
+  .container-dados label {
+    font-size: 24px;
+  }
+
+  .container-logo {
+    width: 500px;
+    height: 500px;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .esqueceu-senha {
+    font-size: 18px;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 2%;
+    left: 30%;
+    font-size: 28px;
+  }
+}
+@media only screen and (max-width: 1920px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+  }
+
+  .container-login {
+    height: 100%;
+    border:4px solid white;
+    border-radius: 10px;
+    padding: 1%;
+    width: 33%;
+  }
+
+  form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 28%;
+
+  }
+
+  .container-dados label {
+    font-size: 24px;
+  }
+
+  .container-logo {
+    width: 500px;
+    height: 500px;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .esqueceu-senha {
+    font-size: 16px;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 2%;
+    left: 30%;
+    font-size: 24px;
+  }
 
 }
+@media only screen and (min-width: 1366px) {
+  .container-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 
-.container-login {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: 5px solid white;
-  padding: 25px 50px;
-  border-radius: 5px;
+  .container-login {
+    height: 27%;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 1%;
+    width: 28%;
+  }
+
+  form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .container-dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-dados input {
+    width: 100%;
+    height: 30%;
+
+  }
+
+  .container-dados label {
+    font-size: 30px;
+  }
+
+  .container-logo {
+    width: 500px;
+    height: 500px;
+  }
+
+  .container-logo img {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .container-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .esqueceu-senha {
+    font-size: 20px;
+  }
+
+  .saiba-mais {
+    position: absolute;
+    bottom: 3%;
+    left: 33%;
+    font-size: 35px;
+  }
 }
-
-.esqueceu-senha {
-  color: white;
-  font-size: 10px;
-  margin: 30px 0;
-}
-
-form {
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 100%;
-  height: 60%;
-  gap: 20px;
-
-}
-
-.container-dados {
-
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-  width: 100%;
-
-}
-
-.container-dados input {
-  height: 20%;
-  border-radius: 5px;
-  border: 3px solid white;
-  padding: 10px;
-  background-color: transparent;
-  color:white
-}
-
-.container-dados input:focus {
-  outline: none;
-}
-
-.container-dados label {
-  color: white;
-  font-size: 15px;
-  margin: 10px 0;
-  font-weight: bold;
-}
-
-.container-botoes {
-  width: 100%;
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-}
-
-.saiba-mais {
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
