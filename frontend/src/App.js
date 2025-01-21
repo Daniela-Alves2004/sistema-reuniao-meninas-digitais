@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Login from './componentes/macro/Login/Login';
+import Login from './Componentes/Macro/Login/Login';
 import Cadastro from './Componentes/Macro/Cadastro/Cadastro.js';
-import Home from './componentes/macro/Home/Home';
+import Home from './Componentes/Macro/Home/Home';
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './componentes/ProtectedRoute';
+import ProtectedRoute from './Componentes/ProtectedRoute';
 
-import Botao from '../../Micro/Botao/Botao';  //Botão é importado aqui e funciona em todo o sistema
+
 
 function App() {
   return (
