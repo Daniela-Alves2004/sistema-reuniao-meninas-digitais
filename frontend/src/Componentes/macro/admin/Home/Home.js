@@ -21,6 +21,7 @@ const HomeAdmin = () => {
   const [showAddMeetingPopup, setShowAddMeetingPopup] = useState(false);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
 
   const handleDateChange = async (newDate) => {
@@ -73,9 +74,19 @@ const HomeAdmin = () => {
     }
   };
 
-  const handleAddMeetingClick = () => {
+  const handleAddMeetingClick = async () => {
     setShowPopup(false);
     setShowAddMeetingPopup(true);
+
+    try {
+      // Busca as localizações disponíveis
+      const response = await axios.get('http://localhost:3000/api/locations/getAllLocations');
+      setLocations(response.data.locations || []);
+    } catch (error) {
+      console.error('Erro ao buscar locais:', error);
+      setLocations([]);
+      alert('Erro ao buscar locais. Tente novamente mais tarde.');
+    }
   };
 
   // Função para enviar os dados do formulário para a rota de criação
@@ -181,7 +192,7 @@ const HomeAdmin = () => {
               {selectedMeeting.location ? (
 
                 <div>
-                  
+
                   {selectedMeeting.location.sala ? (
                     <p>
                       <strong>Local:</strong> {selectedMeeting.location.sala}
@@ -195,7 +206,7 @@ const HomeAdmin = () => {
                   <p>
                     <strong>Tipo:</strong> {selectedMeeting.location.tipo}
                   </p>
-                  
+
                   {selectedMeeting.location.link ? (
                     <p>
                       <strong>Link:</strong>{' '}
@@ -235,18 +246,30 @@ const HomeAdmin = () => {
                 type="date"
                 id="data_reuniao"
                 name="data_reuniao"
-                value={date.toISOString().split("T")[0]} // Formata a data para YYYY-MM-DD
+                value={date.toISOString().split("T")[0]}
                 readOnly
                 required
               />
             </div>
             <div>
-              <label htmlFor="meetingLocation">Local (ID do Local):</label>
-              <input type="number" id="meetingLocation" name="meetingLocation" required />
+              <label htmlFor="meetingLocation">Local:</label>
+              <select id="meetingLocation" name="meetingLocation" required>
+                <option value="" disabled selected>Selecione um local</option>
+                {locations.map((location) => {
+                  const isRemoto = !!location.link; 
+                  const displayName = isRemoto
+                    ? `Remoto - ${location.link}`
+                    : `Presencial - ${location.sala || 'Sala não especificada'}`;
+                  return (
+                    <option key={location.id} value={location.id}>
+                      {displayName}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
 
-            <Button>Adicionar</Button>
-
+            <Button type="submit">Adicionar</Button>
           </form>
         </DialogContent>
       </Dialog>

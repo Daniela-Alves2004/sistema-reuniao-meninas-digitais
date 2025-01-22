@@ -93,6 +93,14 @@
     border: 1px solid #333;
 }
 
+.MuiDialogContent-root form select {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
 .MuiDialogContent-root Button {
     color: white;
     font-size: 25px;
