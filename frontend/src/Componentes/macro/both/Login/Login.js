@@ -48,7 +48,7 @@ const Login = () => {
 
         setTimeout(() => {navigate('/home');}, 1000);
 
-      } else if (response.data.papel === 'Lider') {
+      } else if ((response.data.papel === 'Lider') || (response.data.papel === 'Coordenadora')) {
 
         toast.success('Login bem-sucedido!', {
 
@@ -59,18 +59,6 @@ const Login = () => {
         setIsLoggedIn(true);
 
         setTimeout(() => {navigate('/admin/home');}, 1000);
-
-      } else if (response.data.papel === 'Coordenadora') {
-
-        toast.success('Login bem-sucedido!', {
-
-          autoClose: 1000,
-
-        });
-
-        setIsLoggedIn(true);
-
-        setTimeout(() => {navigate('/home');}, 1000);
 
       }
         
