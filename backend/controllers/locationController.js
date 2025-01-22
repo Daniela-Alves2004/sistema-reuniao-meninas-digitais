@@ -1,6 +1,7 @@
 const Location = require('../models/Location');
 const Meeting = require('../models/Meeting'); 
 
+// Função para pegar a localização de uma reunião
 exports.getLocationByMeeting = async (req, res) => {
   
   const { meetingId } = req.query;
@@ -32,6 +33,25 @@ exports.getLocationByMeeting = async (req, res) => {
   } catch (error) {
 
     console.error('Error fetching location:', error);
+
+    res.status(400).json({ error: error.message });
+
+  }
+
+};
+
+// Função para pegar todas as localizações
+exports.getAllLocations = async (req, res) => {
+
+  try {
+
+    const locations = await Location.findAll();
+
+    res.status(200).json({ locations });
+
+  } catch (error) {
+
+    console.error('Error fetching locations:', error);
 
     res.status(400).json({ error: error.message });
 
