@@ -68,9 +68,9 @@ const Login = () => {
 
   return (
 
-    <div className="container-wrapper">
+    <div className="login-container-wrapper">
 
-      <div className="container-logo">
+      <div className="login-container-logo">
 
         <img
 
@@ -86,7 +86,7 @@ const Login = () => {
 
         <form onSubmit={handleLogin}>
 
-          <div className='container-dados'>
+          <div className='login-container-dados'>
 
             <label htmlFor="registro-aluno">RA:</label>
 
@@ -122,14 +122,14 @@ const Login = () => {
 
           </div>
         
-          <div className='container-botoes'>
+          <div className='login-container-botoes'>
             <Botao className="btEntrar" type="submit" texto="Entrar" />
-            <Botao className="btCadastrar" type="button" texto="Cadastrar" Click={() => console.log('Cadastrar clicado')} />
+            <Botao className="btCadastrar" type="button" texto="Cadastrar" onClick={(e) => { e.preventDefault(); navigate('/cadastro')}} />
           </div>
         </form>
 
-        <p className='esqueceu-senha'>Esqueceu a senha?</p>
-        <p className='saiba-mais'>Clique aqui para saber mais sobre o nosso projeto!</p>
+        <p className="login-esqueceu-senha">Esqueceu a senha?</p>
+        <p className="login-saiba-mais">Clique aqui para saber mais sobre o nosso projeto!</p>
       </div>
 
       <ToastContainer />

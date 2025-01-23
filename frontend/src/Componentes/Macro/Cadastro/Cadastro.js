@@ -153,7 +153,7 @@ function Cadastrar() {
             </div>
             <div className="cadastro-container-botoes">
                   <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" onClick={() => console.log('Cadastrar-se clicado')} />
-                  <Botao className="btIrParaLogin" type="button" texto="Voltar para login" onClick={(e) => { e.preventDefault(); navigate('/login'); }} />
+                  <Botao className="btIrParaLogin" type="button" texto="Voltar para login" onClick={(e) => { e.preventDefault(); navigate('/'); }} />
             </div>
 
           </div>
