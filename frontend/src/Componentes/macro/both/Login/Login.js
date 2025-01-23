@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import logoBranca from '../../../assets/logos/logoBranca.png';
-import Botao from '../../micro/Botao/Botao';
+import logoBranca from '../../../../assets/logos/logoBranca.png';
+import Botao from '../../../micro/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext'; 
+import { AuthContext } from '../../../../contexts/AuthContext';
 require('./Login.css');
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { setIsLoggedIn } = useContext(AuthContext); 
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
 
@@ -32,26 +32,36 @@ const Login = () => {
 
       }, {
 
-        withCredentials: true, 
+        withCredentials: true,
 
       });
 
-      console.log('Resposta do login:', response.data.message);
+      if (response.data.papel === 'Membro') {
 
-      toast.success('Login bem-sucedido!', {
+        toast.success('Login bem-sucedido!', {
 
-        autoClose: 1000,
+          autoClose: 1000,
 
-      });
+        });
 
-      setIsLoggedIn(true);
+        setIsLoggedIn(true);
 
-      setTimeout(() => {
+        setTimeout(() => {navigate('/home');}, 1000);
 
-        navigate('/home');
+      } else if ((response.data.papel === 'Lider') || (response.data.papel === 'Coordenadora')) {
+
+        toast.success('Login bem-sucedido!', {
+
+          autoClose: 1000,
+
+        });
+
+        setIsLoggedIn(true);
+
+        setTimeout(() => {navigate('/admin/home');}, 1000);
+
+      }
         
-      }, 1000);
-
     } catch (error) {
 
       toast.error('Erro no login. Verifique suas credenciais.', {
@@ -121,7 +131,7 @@ const Login = () => {
             />
 
           </div>
-        
+
           <div className='container-botoes'>
             <Botao className="btEntrar" type="submit" texto="Entrar" />
             <Botao className="btCadastrar" type="button" texto="Cadastrar" Click={() => console.log('Cadastrar clicado')} />

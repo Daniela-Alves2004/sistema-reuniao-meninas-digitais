@@ -1,7 +1,6 @@
 const Meeting = require('../models/Meeting');
 
 // Função para buscar reuniões por data
-
 exports.getMeetingByDate = async (req, res) => {
   
     const { date } = req.query;
@@ -34,3 +33,34 @@ exports.getMeetingByDate = async (req, res) => {
     }
 
 };
+
+// Função para criar reuniões
+exports.createMeeting = async (req, res) => {
+
+    const { data_reuniao, pauta, id_local } = req.body;
+
+    try {
+
+        const meeting = await Meeting.create({
+
+            data_reuniao,
+
+            data_criacao: new Date(),
+
+            pauta,
+
+            id_local
+
+        });
+
+        res.status(201).json({ meeting });
+
+    } catch (error) {
+
+        console.error('Error creating meeting:', error);
+
+        res.status(400).json({ error: error.message });
+
+    }
+
+}

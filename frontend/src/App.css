@@ -14,3 +14,231 @@
     background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
 
 }
+
+.MuiPaper-root {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.MuiDialogContent-root {
+    background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    width: 600px; /* Largura padrão */
+    height: 500px; /* Altura padrão */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); /* Sombra para destacar */
+}
+
+.MuiDialogContent-root div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+
+.MuiDialogContent-root div ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.MuiDialogContent-root div ul li {
+    padding: 20px;
+    border: 5px solid white;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.MuiDialogContent-root ul li:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.MuiDialogContent-root form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.MuiDialogContent-root form div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.MuiDialogContent-root form label {
+    font-size: 1rem;
+    margin: 10px;
+    width: 50%;
+    text-align: center;
+}
+
+.MuiDialogContent-root form input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    color: white;
+    background-color: transparent;
+}
+
+.MuiDialogContent-root form select {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    color: white;
+    background-color: transparent;
+}
+
+.MuiDialogContent-root form select option {
+    color: black;
+}
+
+.MuiDialogContent-root Button {
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .MuiDialogContent-root {
+        width: 90%;
+        height: auto;
+        box-shadow: none;
+    }
+
+    .MuiDialogContent-root div ul li {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+
+    .MuiDialogContent-root form input,
+    .MuiDialogContent-root form select {
+        width: 100%;
+    }
+
+    .MuiDialogContent-root Button {
+        font-size: 20px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    .MuiDialogContent-root {
+        width: 80%;
+        height: auto;
+    }
+
+    .MuiDialogContent-root div ul li {
+        padding: 18px;
+        font-size: 1rem;
+    }
+
+    .MuiDialogContent-root form input,
+    .MuiDialogContent-root form select {
+        width: 90%;
+    }
+
+    .MuiDialogContent-root Button {
+        font-size: 22px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .MuiDialogContent-root {
+        width: 70%;
+        height: auto;
+    }
+
+    .MuiDialogContent-root div ul li {
+        padding: 20px;
+        font-size: 1.1rem;
+    }
+
+    .MuiDialogContent-root form input,
+    .MuiDialogContent-root form select {
+        width: 85%;
+    }
+
+    .MuiDialogContent-root Button {
+        font-size: 24px;
+    }
+
+    span {
+        font-size: 1.05rem;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .MuiDialogContent-root {
+        width: 600px;
+        height: 500px;
+    }
+
+    .MuiDialogContent-root div ul li {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+
+    .MuiDialogContent-root form input,
+    .MuiDialogContent-root form select {
+        width: 80%;
+    }
+
+    .MuiDialogContent-root Button {
+        font-size: 25px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .MuiDialogContent-root {
+        width: 600px;
+        height: 500px;
+    }
+
+    .MuiDialogContent-root div ul li {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+
+    .MuiDialogContent-root form input,
+    .MuiDialogContent-root form select {
+        width: 80%;
+    }
+
+    .MuiDialogContent-root Button {
+        font-size: 25px;
+    }
+}
