@@ -13,6 +13,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import axios from 'axios';
 import { Button } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+
+// Importando Toast
 
 const HomeAdmin = () => {
   const [date, setDate] = useState(new Date());
@@ -106,7 +109,15 @@ const HomeAdmin = () => {
       });
 
       if (response.status === 201) {
-        alert("Reunião criada com sucesso!");
+
+        // Mostre um toast de sucesso
+        
+        toast.success('Reunião criada com sucesso!', {
+
+          autoClose: 3000,
+
+        });
+
         closePopup();
       }
     } catch (error) {
@@ -117,7 +128,9 @@ const HomeAdmin = () => {
 
 
   return (
+
     <div className="divHome">
+
       <Header />
 
       <div className="divCalendar">
@@ -274,8 +287,10 @@ const HomeAdmin = () => {
         </DialogContent>
       </Dialog>
 
+      <ToastContainer />
 
     </div>
+
   );
 };
 
