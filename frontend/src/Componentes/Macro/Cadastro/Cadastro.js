@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logoBranca from '../../../assets/logos/logoBranca.png';
-import Botao from '../../Micro/Botao/Botao';
+import Botao from '../../micro/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -14,23 +14,28 @@ function Cadastrar() {
   const [telefone, setTelefone] = useState('');
   const [ra, setRa] = useState('');
   const [senha, setSenha] = useState('');
+  const [papel, setPapel] = useState('');
+  const [setor, setSetor] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
 
   const navigate = useNavigate();
 
   const handleCadastro = async (event) => {
-    debugger;
     event.preventDefault();
 
     try {
+
       const response = await axios.post('http://localhost:3000/api/users/register', {
+
         primeiro_nome: primeiroNome,
         ultimo_nome: ultimoNome,
         email: email,
         telefone: telefone,
         ra: ra,
-        senha: senha,
-        confirmarSenha: confirmarSenha,
+        senha: senha, 
+        papel: papel,
+        id_setor: setor,
+
       });
 
       console.log('Resposta do cadastro:', response.mensagem);
@@ -40,7 +45,7 @@ function Cadastrar() {
       });
 
       setTimeout(() => {
-        navigate('/login');
+        navigate('/');
       }, 3000);
     } catch (error) {
       toast.error('Erro no cadastro. Verifique as informações inseridas.', {
@@ -57,7 +62,6 @@ function Cadastrar() {
           src={logoBranca}
           alt="Logo do projeto de extensão Meninas Digitais na cor branca"
         />
-        <p>Cadastro</p>
       </div>
       <div className='cadastro-container-cadastro'>
         <form onSubmit={handleCadastro}>
@@ -132,7 +136,8 @@ function Cadastrar() {
                 <div className='cadastro-setor-papel'>
                   <select
                     id='setores'
-                    name='setores'>
+                    name='setores'
+                    onChange={(e) => setSetor(e.target.value)}>
                       <option disabled value selected>--Setores--</option>
                       <option value='1'>Marketing</option>
                       <option value='2'>Gestão de Pessoas</option>
@@ -142,18 +147,20 @@ function Cadastrar() {
                   </select>
                   <select
                     id='papeis'
-                    name='papeis'>
+                    name='papeis'
+                    onChange={(e) => setPapel(e.target.value)}>
                       <option disabled value selected>--Papeis--</option>
-                      <option value='Aluna'>Aluna</option>
-                      <option value='Professora'>Professora</option>
-                      <option value='Coordenadora de setor'>Coordenadora de setor</option>
+                      <option value='Membro'>Aluna</option>
+                      <option value='Lider'>Lider</option>
+                      <option value='Coordenadora'>Coordenadora</option>
                     </select>
                 </div>
               </div>
             </div>
             <div className="cadastro-container-botoes">
-                  <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" onClick={() => console.log('Cadastrar-se clicado')} />
-                  <Botao className="btIrParaLogin" type="button" texto="Voltar para login" onClick={(e) => { e.preventDefault(); navigate('/'); }} />
+              	<Botao className="btIrParaLogin" type="button" texto="Voltar para login" onClick={(e) => { e.preventDefault(); navigate('/'); }} />
+
+                <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" onClick={() => console.log('Cadastrar-se clicado')} />
             </div>
 
           </div>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Login from './Componentes/Macro/Login/Login';
-import Cadastro from './Componentes/Macro/Cadastro/Cadastro.js';
-import Home from './Componentes/Macro/Home/Home';
+import Login from './componentes/macro/Login/Login.js';
+import Cadastro from './componentes/macro/Cadastro/Cadastro.js';
+import Home from './componentes/macro/Home/Home.js';
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './Componentes/ProtectedRoute';
+import ProtectedRoute from './componentes/ProtectedRoute';
 
 
 

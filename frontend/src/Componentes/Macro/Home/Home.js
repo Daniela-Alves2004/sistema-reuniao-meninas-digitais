@@ -3,7 +3,7 @@ import 'react-calendar/dist/Calendar.css';
 import './Home.css';
 
 // Componente Header
-import Header from '../../Micro/Header/Header';
+import Header from '../../micro/Header/Header';
 
 // Importando a biblioteca de calendário
 import Calendar from 'react-calendar';
