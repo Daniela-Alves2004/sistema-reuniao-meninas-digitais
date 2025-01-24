@@ -68,6 +68,8 @@ exports.loginUser = async (req, res) => {
 
       message: 'Login efetuado com sucesso',
 
+      papel: user.papel,
+
     });
 
   } catch (error) {

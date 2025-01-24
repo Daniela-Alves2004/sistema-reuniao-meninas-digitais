@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.get('/getMeetingByDate', meetingController.getMeetingByDate);
 
+router.post('/createMeeting', meetingController.createMeeting);
+
 module.exports = router;
