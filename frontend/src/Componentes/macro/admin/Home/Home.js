@@ -12,6 +12,7 @@ import Calendar from 'react-calendar';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import axios from 'axios';
+
 import { Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -197,7 +198,6 @@ const HomeAdmin = () => {
         <DialogContent>
           {selectedMeeting ? (
             <div>
-
               <p>
                 <strong>Pauta:</strong> {selectedMeeting.pauta}
               </p>

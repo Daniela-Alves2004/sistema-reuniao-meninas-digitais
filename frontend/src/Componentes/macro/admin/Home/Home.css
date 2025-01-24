@@ -45,6 +45,44 @@ span {
     font-size: 1.0rem;
 }
 
+.MuiDialogContent-root {
+    background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    padding: 25px !important;
+}
+
+.MuiDialogContent-root p {
+    margin: 20px;
+}
+
+.MuiDialogContent-root ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.MuiDialogContent-root ul li {
+    padding: 20px;
+    border: 5px solid white;
+    border-radius: 5px;
+    margin: 20px;
+    width: 80%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.MuiDialogContent-root ul li:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .react-calendar {

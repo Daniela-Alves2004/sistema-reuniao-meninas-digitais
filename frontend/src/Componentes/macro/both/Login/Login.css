@@ -1,19 +1,20 @@
-.container-wrapper {
+
+.login-container-wrapper {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
-  background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
   font-family: "Inter", serif;
   padding: 20px;
 }
 
-.container-logo {
+.login-container-logo {
   display: flex;
   justify-content: center;
 }
 
-.container-logo img {
+.login-container-logo img {
+
   width: 50%;
   height: auto;
 }
@@ -29,7 +30,7 @@
   border-radius: 5px;
 }
 
-.esqueceu-senha {
+.login-esqueceu-senha {
   color: white;
   font-size: 10px;
   margin: 10px 0;
@@ -44,14 +45,14 @@ form {
   gap: 20px;
 }
 
-.container-dados {
+.login-container-dados {
   display: flex;
   flex-direction: column;
   gap: 10%;
   width: 100%;
 }
 
-.container-dados input {
+.login-container-dados input {
   height: 20%;
   border-radius: 5px;
   border: 3px solid white;
@@ -60,25 +61,25 @@ form {
   color: white;
 }
 
-.container-dados input:focus {
+.login-container-dados input:focus {
   outline: none;
 }
 
-.container-dados label {
+.login-container-dados label {
   color: white;
   font-size: 15px;
   margin: 10px 0;
   font-weight: bold;
 }
 
-.container-botoes {
+.login-container-botoes {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10%;
 }
 
-.saiba-mais {
+.login-saiba-mais {
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -87,11 +88,11 @@ form {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .container-wrapper {
+  .login-container-wrapper {
     flex-direction: column;
     padding: 20px;
   }
-  .container-logo img {
+  .login-container-logo img {
     width: 40%;
   }
   .container-login {
@@ -99,63 +100,66 @@ form {
     padding: 20px;
     justify-content: flex-start;
   }
-  .container-dados input {
+
+  .login-container-dados input {
     width: 100%;
   }
-  .container-botoes {
+  .login-container-botoes {
     margin: 25px 0;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-  .container-wrapper {
+  .login-container-wrapper {
     flex-direction: column;
     padding: 20px;
   }
-  .container-logo img {
+  .login-container-logo img {
     width: 40%;
   }
   .container-login {
     width: 85%;
     padding: 25px;
   }
-  .container-dados input {
+
+  .login-container-dados input {
     width: 100%;
   }
-  .container-botoes {
+  .login-container-botoes {
     margin: 20px 0;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .container-wrapper {
+  .login-container-wrapper {
     flex-direction: row;
     padding: 30px;
   }
-  .container-logo img {
+  .login-container-logo img {
     width: 60%;
   }
   .container-login {
     width: 80%;
     padding: 30px;
   }
-  .container-dados input {
+
+  .login-container-dados input {
     width: 100%;
   }
-  .container-botoes {
+  .login-container-botoes {
     justify-content: space-around;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .container-wrapper {
+  .login-container-wrapper {
     flex-direction: row;
     padding: 40px;
   }
-  .container-logo img {
+  .login-container-logo img {
     width: 50%;
   }
   .container-login {
@@ -166,18 +170,19 @@ form {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .container-wrapper {
+  .login-container-wrapper {
     flex-direction: row;
     padding: 50px;
   }
-  .container-logo img {
+  .login-container-logo img {
     width: 40%;
   }
   .container-login {
     width: 60%;
     padding: 50px;
   }
-  .container-botoes {
+
+  .login-container-botoes {
     justify-content: space-between;
   }
 }

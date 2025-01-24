@@ -1,4 +1,4 @@
-.btEntrar, .btCadastrar{
+.btEntrar, .btCadastrar, .btIrParaLogin{
     background-color: white;
     color: #91327A;
     border-radius: 5px;
@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-.btEntrar:hover, .btCadastrar:hover{
+.btEntrar:hover, .btCadastrar:hover, .btIrParaLogin:hover{
     background-color: #91327A;
     color: white;
     cursor: pointer;

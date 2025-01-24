@@ -7,12 +7,15 @@ import Login from './componentes/macro/both/Login/Login';
 
 // Páginas da Usuária Normal
 import Home from './componentes/macro/normal/Home/Home';
+import Cadastro from './componentes/macro/normal/Cadastro/Cadastro.js';
 
 // Páginas da Usuária Administradora
 import HomeAdmin from './componentes/macro/admin/Home/Home';
 
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './componentes/ProtectedRoute';
+import ProtectedRoute from './componentes/ProtectedRoute.js';
+
+
 
 function App() {
 
@@ -26,6 +29,9 @@ function App() {
 
           {/* Rota de login pública */}
           <Route path="/" element={<Login />} />
+
+          {/* Rota para a página de cadastro */}
+          <Route path="/cadastro" element={<Cadastro />} />
 
           {/* Rota protegida */}
           <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
