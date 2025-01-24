@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 // Páginas para qualquer tipo de Usuária
-import Login from './componentes/macro/both/Login/Login';
+import Login from './Componentes/macro/both/Login/Login';
 
 // Páginas da Usuária Normal
-import Home from './componentes/macro/normal/Home/Home';
-import Cadastro from './componentes/macro/normal/Cadastro/Cadastro.js';
+import Home from './Componentes/macro/normal/Home/Home';
+import Cadastro from './Componentes/macro/normal/Cadastro/Cadastro.js';
 
 // Páginas da Usuária Administradora
-import HomeAdmin from './componentes/macro/admin/Home/Home';
+import HomeAdmin from './Componentes/macro/admin/Home/Home';
 
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './componentes/ProtectedRoute.js';
+import ProtectedRoute from './Componentes/ProtectedRoute.js';
 
 
 

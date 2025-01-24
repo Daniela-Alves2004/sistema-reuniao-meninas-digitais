@@ -134,7 +134,7 @@ const Login = () => {
 
           <div className='login-container-botoes'>
             <Botao className="btEntrar" type="submit" texto="Entrar" />
-            <Botao className="btCadastrar" type="button" texto="Cadastrar" Click={() => console.log('Cadastrar clicado')} />
+            <Botao className="btCadastrar" type="button" texto="Cadastrar" onClick={(e) => { e.preventDefault(); navigate('/cadastro')}} />
           </div>
         </form>
 
