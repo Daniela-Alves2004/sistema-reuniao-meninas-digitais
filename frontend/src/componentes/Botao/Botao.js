@@ -1,4 +1,4 @@
-import './Style.css'
+require('./Botao.css');
 
 const Botao = ({ className = {}, tipo, texto, onClick }) => {
 

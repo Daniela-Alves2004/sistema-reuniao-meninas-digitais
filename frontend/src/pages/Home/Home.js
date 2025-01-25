@@ -12,7 +12,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import axios from 'axios';
 
-import { Button } from '@mui/material';
+import Botao from '../../componentes/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 
 // Importanto a função para verificar o token
@@ -192,7 +192,7 @@ const Home = () => {
               </ul>
 
               {getDecodedToken()?.papel.trim() === 'Lider' && (
-                <Button onClick={handleAddMeetingClick}>+</Button>
+                <Botao texto={"+"} className="btAdicionar" onClick={handleAddMeetingClick}></Botao>
               )}
 
             </div>
@@ -201,7 +201,7 @@ const Home = () => {
               <p>Nenhuma reunião encontrada para esta data.</p>
 
               {getDecodedToken()?.papel.trim() === 'Lider' && (
-                <Button onClick={handleAddMeetingClick}>+</Button>
+                <Botao texto={"+"} className="btAdicionar" onClick={handleAddMeetingClick}></Botao>
               )}
 
             </div>
@@ -217,7 +217,7 @@ const Home = () => {
               <label htmlFor="ata">Conteúdo da Ata:</label>
               <textarea id="ata" name="ata" rows="4" required />
             </div>
-            <Button type="submit">Salvar Ata</Button>
+            <Botao texto={"+"} className="btAdicionar" type="submit"></Botao>
           </form>
         </DialogContent>
       </Dialog>
@@ -272,10 +272,10 @@ const Home = () => {
 
               {/* Botão para adicionar ata - Somente para Lideres */}
               {getDecodedToken()?.papel.trim() === 'Lider' && (
-                <Button onClick={() => {
+                <Botao texto={"+"} className="btAdicionar" onClick={() => {
                   closePopup();
                   handleAddMinutesClick(selectedMeeting);
-                }}>Adicionar Ata</Button>
+                }}></Botao>
               )}
 
             </div>
@@ -331,7 +331,7 @@ const Home = () => {
                 })}
               </select>
             </div>
-            <Button type="submit">Adicionar</Button>
+            <Botao texto={"+"} className="btAdicionar" type="submit"></Botao>
           </form>
         </DialogContent>
       </Dialog>
