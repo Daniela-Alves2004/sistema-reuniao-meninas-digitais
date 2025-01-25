@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import logoBranca from '../../../../assets/logos/logoBranca.png';
-import Botao from '../../../micro/Botao/Botao';
+import logoBranca from '../../assets/logos/logoBranca.png';
+import Botao from '../../componentes/micro/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../../contexts/AuthContext';
+
 require('./Login.css');
 
 const Login = () => {
@@ -15,8 +15,6 @@ const Login = () => {
   const [senha, setSenha] = useState('');
 
   const navigate = useNavigate();
-
-  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
 
@@ -44,8 +42,6 @@ const Login = () => {
 
         });
 
-        setIsLoggedIn(true);
-
         setTimeout(() => {navigate('/home');}, 1000);
 
       } else if ((response.data.papel === 'Lider') || (response.data.papel === 'Coordenadora')) {
@@ -55,8 +51,6 @@ const Login = () => {
           autoClose: 1000,
 
         });
-
-        setIsLoggedIn(true);
 
         setTimeout(() => {navigate('/admin/home');}, 1000);
 

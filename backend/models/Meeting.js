@@ -1,5 +1,3 @@
-// models/Meeting.js
-
 const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/database');
@@ -23,6 +21,14 @@ Meeting.init({
   data_reuniao: {
 
     type: DataTypes.DATE,
+
+    allowNull: false
+
+  },
+
+  hora_reuniao: {
+
+    type: DataTypes.TIME,
 
     allowNull: false
 

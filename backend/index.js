@@ -1,17 +1,10 @@
 const express = require('express');
-
 const cors = require('cors');
-
 const cookieParser = require('cookie-parser');
-
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 const userRoutes = require('./routes/userRoutes');
-
 const meetingRoutes = require('./routes/meetingRoutes');
-
 const locationRoutes = require('./routes/locationRoutes');
-
+const minutesRoutes = require('./routes/minutesRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config(); // Configura as variáveis de ambiente
@@ -19,24 +12,25 @@ dotenv.config(); // Configura as variáveis de ambiente
 const app = express(); // Inicializa o servidor
 
 app.use(express.json()); // Permite o uso de JSON nas requisições
-
 app.use(cookieParser()); // Permite o uso de cookies
 
 app.use(cors({
-
   origin: 'http://localhost:3001',
-
-  credentials: true // Permite o envio de cookies
-
+  credentials: true
 }));
 
 app.use('/api/users', userRoutes); // Rota para usuários
-
 app.use('/api/meetings', meetingRoutes); // Rota para reuniões
-
 app.use('/api/locations', locationRoutes); // Rota para locais
+app.use('/api/minutes', minutesRoutes); // Rota para atas
 
-app.use('/', createProxyMiddleware({ target: 'http://localhost:3001', changeOrigin: true })); // Proxy para o frontend
+// Servir arquivos estáticos do frontend diretamente
+app.use(express.static('path/to/frontend/build'));
+
+// Redirecionar todas as outras solicitações para o arquivo principal do frontend
+app.get('*', (req, res) => {
+  res.sendFile('path/to/frontend/build/index.html', { root: __dirname });
+});
 
 const PORT = process.env.PORT || 3000; // Porta do servidor
 

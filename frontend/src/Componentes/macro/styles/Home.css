@@ -5,7 +5,7 @@
 }
 
 .divHome .divCalendar {
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,8 +13,8 @@
 }
 
 .react-calendar {
-    width: 60vw !important; 
-    height: 75vh !important;
+    width: 70vw ; 
+    height: 70vh ;
     border-radius: 20px;
     padding: 40px;
     background-color: #fff;
@@ -38,30 +38,22 @@
 }
 
 abbr {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 span {
-    font-size: 1.0rem;
+    font-size: 1rem;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .react-calendar {
-        width: 90vw !important;
-        height: 45vh !important;
+        width: 90vw ;
+        height: 45vh ;
     }
 
     .react-calendar__tile {
         padding: 10px;
-    }
-
-    abbr {
-        font-size: 0.8rem;
-    }
-
-    span {
-        font-size: 0.9rem;
     }
 
 }
@@ -69,20 +61,12 @@ span {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     .react-calendar {
-        width: 80vw !important;
-        height: 70vh !important;
+        width: 80vw ;
+        height: 70vh ;
     }
 
     .react-calendar__tile {
         padding: 15px;
-    }
-
-    abbr {
-        font-size: 1.2rem;
-    }
-
-    span {
-        font-size: 1.0rem;
     }
 
 }
@@ -90,20 +74,12 @@ span {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .react-calendar {
-        width: 70vw !important;
-        height: 75vh !important;
+        width: 70vw ;
+        height: 75vh ;
     }
 
     .react-calendar__tile {
         padding: 18px;
-    }
-
-    abbr {
-        font-size: 1.25rem;
-    }
-
-    span {
-        font-size: 1.05rem;
     }
 
 }
@@ -111,20 +87,12 @@ span {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .react-calendar {
-        width: 65vw !important;
-        height: 75vh !important;
+        width: 65vw ;
+        height: 75vh ;
     }
 
     .react-calendar__tile {
         padding: 20px;
-    }
-
-    abbr {
-        font-size: 1.3rem;
-    }
-
-    span {
-        font-size: 1.0rem;
     }
 
 }
@@ -132,20 +100,12 @@ span {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .react-calendar {
-        width: 60vw !important;
-        height: 75vh !important;
+        width: 80vw ;
+        height: 65vh ;
     }
 
     .react-calendar__tile {
         padding: 20px;
-    }
-
-    abbr {
-        font-size: 1.3rem;
-    }
-
-    span {
-        font-size: 1.0rem;
     }
 
 }

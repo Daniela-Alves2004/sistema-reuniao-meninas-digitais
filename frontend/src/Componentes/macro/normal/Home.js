@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
-import './Home.css';
+
+import '../styles/Home.css';
 
 // Componente Header
-import Header from '../../../micro/Header/Header';
+import Header from '../../micro/Header/Header';
 
 // Importando a biblioteca de calendário
 import Calendar from 'react-calendar';
@@ -14,6 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import axios from 'axios';
 
 const Home = () => {
+
   const [date, setDate] = useState(new Date());
   const [showPopup, setShowPopup] = useState(false);
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
@@ -21,19 +23,17 @@ const Home = () => {
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [error, setError] = useState(null);
 
+  // Função para buscar as reuniões de uma data específica
   const handleDateChange = async (newDate) => {
     setDate(newDate);
     setShowPopup(true);
     setError(null);
-
     try {
       const formattedDate = newDate.toISOString().split('T')[0];
       console.log('formattedDate:', formattedDate);
-
       const response = await axios.get(`http://localhost:3000/api/meetings/getMeetingByDate`, {
         params: { date: formattedDate }
       });
-
       setMeetingData(response.data);
     } catch (error) {
       console.error('Erro ao buscar dados da reunião:', error);
@@ -42,21 +42,21 @@ const Home = () => {
     }
   };
 
+  // Função para fechar o Pop-Up
   const closePopup = () => {
     setShowPopup(false);
     setShowDetailsPopup(false);
   };
 
+  // Função para abrir o Pop-Up com os detalhes da reunião
   const openMeetingDetails = async (meeting) => {
     setSelectedMeeting(meeting);
     setShowPopup(false);
     setShowDetailsPopup(true);
-
     try {
       const response = await axios.get('http://localhost:3000/api/locations/getLocationByMeeting', {
         params: { meetingId: meeting.id }
       });
-
       setSelectedMeeting(prevState => ({
         ...prevState,
         location: response.data.location,
@@ -71,19 +71,34 @@ const Home = () => {
   };
 
   return (
+
     <div className="divHome">
+
       <Header />
+
       <div className="divCalendar">
+
         <Calendar onChange={handleDateChange} value={date} />
+
       </div>
+
+      {/* Pop-Up para visualizar as reuniões de uma data específica. */}
       <Dialog open={showPopup} onClose={closePopup}>
         <DialogContent>
           {error ? (
             <p>{error}</p>
           ) : meetingData && meetingData.meetings && meetingData.meetings.length > 0 ? (
             <div>
-              <p>{meetingData.meetings[0].data_reuniao}</p>
-              <p>Reuniões do dia:</p>
+              <p>
+                {new Date(
+                  new Date(meetingData.meetings[0].data_reuniao).setDate(
+                    new Date(meetingData.meetings[0].data_reuniao).getDate() + 1
+                  )
+                ).toLocaleDateString('pt-BR', {
+                  day: '2-digit',
+                  month: 'long',
+                })}
+              </p>
               <ul>
                 {meetingData.meetings.map((meeting, index) => (
                   <li key={index} onClick={() => openMeetingDetails(meeting)}>
@@ -97,27 +112,53 @@ const Home = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Pop-Up para visualizar as informações de uma reunião. */}
       <Dialog open={showDetailsPopup} onClose={closePopup}>
         <DialogContent>
           {selectedMeeting ? (
             <div>
-              <p><strong>Pauta:</strong> {selectedMeeting.pauta}</p>
               {selectedMeeting.location ? (
                 <div>
+                  <p>
+                    <strong>Pauta:</strong> {selectedMeeting.pauta}
+                  </p>
+                  <p>
+                    <strong>Hora da Reunião: </strong>
+                    {new Date(`1970-01-01T${selectedMeeting.hora_reuniao}`).toLocaleTimeString('pt-BR', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
                   {selectedMeeting.location.sala ? (
-                    <p><strong>Local:</strong> {selectedMeeting.location.sala}</p>
+                    <p>
+                      <strong>Local:</strong> {selectedMeeting.location.sala}
+                    </p>
                   ) : (
-                    <p><strong>Local:</strong> Sala não disponível.</p>
+                    <p>
+                      <strong>Local:</strong> Sala não disponível.
+                    </p>
                   )}
-                  <p><strong>Tipo:</strong> {selectedMeeting.location.tipo}</p>
+                  <p>
+                    <strong>Tipo:</strong> {selectedMeeting.location.tipo}
+                  </p>
                   {selectedMeeting.location.link ? (
-                    <p><strong>Link:</strong> <a href={selectedMeeting.location.link} target="_blank" rel="noopener noreferrer">{selectedMeeting.location.link}</a></p>
+                    <p>
+                      <strong>Link:</strong>{' '}
+                      <a href={selectedMeeting.location.link} target="_blank" rel="noopener noreferrer">
+                        {selectedMeeting.location.link}
+                      </a>
+                    </p>
                   ) : (
-                    <p><strong>Link:</strong> Link não disponível.</p>
+                    <p>
+                      <strong>Link:</strong> Link não disponível.
+                    </p>
                   )}
                 </div>
               ) : (
-                <p><strong>Local não disponível.</strong></p>
+                <p>
+                  <strong>Local não disponível.</strong>
+                </p>
               )}
             </div>
           ) : (
@@ -125,8 +166,11 @@ const Home = () => {
           )}
         </DialogContent>
       </Dialog>
+
     </div>
+
   );
+
 };
 
 export default Home;

@@ -1,10 +1,10 @@
 CREATE TABLE "Setor"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
+    "id" SERIAL PRIMARY KEY, 
     "nome" TEXT NOT NULL
 );
 
 CREATE TABLE "Usuario"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
+    "id" SERIAL PRIMARY KEY, 
     "ra" INTEGER NOT NULL UNIQUE,
     "primeiro_nome" TEXT NOT NULL,
     "ultimo_nome" TEXT NOT NULL,
@@ -12,56 +12,56 @@ CREATE TABLE "Usuario"(
     "email" TEXT NOT NULL UNIQUE,
     "telefone" TEXT,
     "senha" TEXT NOT NULL,
-    "id_setor" INTEGER, -- Alterado para INTEGER (correspondente ao SERIAL)
+    "id_setor" INTEGER, 
     FOREIGN KEY ("id_setor") REFERENCES "Setor"("id")
 );
 
 CREATE TABLE "Local"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
+    "id" SERIAL PRIMARY KEY, 
     "tipo" TEXT NOT NULL,
     "link" TEXT,
     "sala" TEXT
 );
 
 CREATE TABLE "Reuniao"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
+    "id" SERIAL PRIMARY KEY, 
     "data_reuniao" DATE NOT NULL,
+    "hora_reuniao" TIME NOT NULL,
     "data_criacao" DATE NOT NULL,
     "pauta" TEXT NOT NULL,
-    "id_local" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
+    "id_local" INTEGER NOT NULL, 
     FOREIGN KEY ("id_local") REFERENCES "Local"("id")
 );
 
 CREATE TABLE "Participacao"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
-    "id_usuario" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
-    "id_reuniao" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
+    "id" SERIAL PRIMARY KEY, 
+    "id_usuario" INTEGER NOT NULL, 
+    "id_reuniao" INTEGER NOT NULL, 
     "presente" BOOLEAN NOT NULL,
     FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("id"),
     FOREIGN KEY ("id_reuniao") REFERENCES "Reuniao"("id")
 );
 
 CREATE TABLE "Ata"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
-    "conteudo" BYTEA NOT NULL,
-    "arquivos" BYTEA,
-    "id_usuario" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
-    FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("id")
+    "id" SERIAL PRIMARY KEY, 
+    "conteudo" TEXT NOT NULL,
+    "id_reuniao" INTEGER NOT NULL,
+    FOREIGN KEY ("id_reuniao") REFERENCES "Reuniao"("id")
 );
 
 CREATE TABLE "Relatorio"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
+    "id" SERIAL PRIMARY KEY, 
     "data_criacao" DATE NOT NULL,
     "tipo_relatorio" TEXT NOT NULL,
     "conteudo" BYTEA NOT NULL,
-    "id_usuario" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
+    "id_usuario" INTEGER NOT NULL, 
     FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("id")
 );
 
 CREATE TABLE "Convite"(
-    "id" SERIAL PRIMARY KEY, -- Alterado para SERIAL
-    "id_reuniao" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
-    "id_usuario" INTEGER NOT NULL, -- Alterado para INTEGER (correspondente ao SERIAL)
+    "id" SERIAL PRIMARY KEY, 
+    "id_reuniao" INTEGER NOT NULL, 
+    "id_usuario" INTEGER NOT NULL, 
     FOREIGN KEY ("id_reuniao") REFERENCES "Reuniao"("id"),
     FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("id")
 );
@@ -84,18 +84,18 @@ INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.goo
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K002');
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K003');
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-18', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
+INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-18', '14:00', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-19', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
+INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-19', '15:00', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-20', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
+INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-20', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-21', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
+INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-21', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
 
-INSERT INTO "Reuniao" ("data_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-22', '2025-01-22', 'Inteligência Artificial e o Futuro da Educação: Desafios e Oportunidades no Ensino Personalizado', 5);
+INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
+VALUES ('2025-01-22', '18:00', '2025-01-22', 'Inteligência Artificial e o Futuro da Educação: Desafios e Oportunidades no Ensino Personalizado', 5);
 

@@ -35,18 +35,43 @@ html, body {
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    width: 600px; /* Largura padrão */
-    height: 500px; /* Altura padrão */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); /* Sombra para destacar */
+    width: 500px !important; 
+    height: auto !important; 
+}
+
+.MuiDialogContent-root div p{
+
+    margin: 10px 0;
+
+}
+
+.MuiDialogContent-root div div p{
+
+    font-size: 1rem;
+    margin: 10px 0;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    text-align: left !important;
+
+}
+
+.MuiDialogContent-root div div p a{
+
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+
 }
 
 .MuiDialogContent-root div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     width: 100%;
-    height: 100%;
 }
 
 .MuiDialogContent-root div ul {
@@ -93,12 +118,19 @@ html, body {
 .MuiDialogContent-root form label {
     font-size: 1rem;
     margin: 10px;
-    width: 50%;
-    text-align: center;
+    text-align: left;
 }
 
 .MuiDialogContent-root form input {
-    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    color: white;
+    background-color: transparent;
+}
+
+.MuiDialogContent-root form textarea {
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
@@ -123,7 +155,7 @@ html, body {
 
 .MuiDialogContent-root Button {
     color: white;
-    font-size: 25px;
+    font-size: 1rem;
     padding: 10px;
     border: none;
     width: 100%;
@@ -150,9 +182,6 @@ html, body {
         width: 100%;
     }
 
-    .MuiDialogContent-root Button {
-        font-size: 20px;
-    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -172,9 +201,6 @@ html, body {
         width: 90%;
     }
 
-    .MuiDialogContent-root Button {
-        font-size: 22px;
-    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -192,10 +218,6 @@ html, body {
     .MuiDialogContent-root form input,
     .MuiDialogContent-root form select {
         width: 85%;
-    }
-
-    .MuiDialogContent-root Button {
-        font-size: 24px;
     }
 
     span {
@@ -220,9 +242,6 @@ html, body {
         width: 80%;
     }
 
-    .MuiDialogContent-root Button {
-        font-size: 25px;
-    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -242,7 +261,4 @@ html, body {
         width: 80%;
     }
 
-    .MuiDialogContent-root Button {
-        font-size: 25px;
-    }
 }

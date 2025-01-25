@@ -3,45 +3,36 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 // Páginas para qualquer tipo de Usuária
-import Login from './Componentes/macro/both/Login/Login';
+import Login from './pages/Login/Login';
+import Cadastro from './pages/Cadastro/Cadastro';
 
 // Páginas da Usuária Normal
-import Home from './Componentes/macro/normal/Home/Home';
-import Cadastro from './Componentes/macro/normal/Cadastro/Cadastro.js';
+import Home from './componentes/macro/normal/Home';
 
 // Páginas da Usuária Administradora
-import HomeAdmin from './Componentes/macro/admin/Home/Home';
-
-import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './Componentes/ProtectedRoute.js';
-
-
+import HomeAdmin from './componentes/macro/admin/Home';
 
 function App() {
 
   return (
 
-    <AuthProvider>
+    <Router>
 
-      <Router>
+      <Routes>
 
-        <Routes>
+        {/* Rota de login pública */}
+        <Route path="/" element={<Login />} />
 
-          {/* Rota de login pública */}
-          <Route path="/" element={<Login />} />
+        {/* Rota para a página de cadastro */}
+        <Route path="/cadastro" element={<Cadastro />} />
 
-          {/* Rota para a página de cadastro */}
-          <Route path="/cadastro" element={<Cadastro />} />
+        {/* Rota protegida */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/admin/home" element={<HomeAdmin />} />
 
-          {/* Rota protegida */}
-          <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-          <Route path="/admin/home" element={<ProtectedRoute element={<HomeAdmin />} />} />
+      </Routes>
 
-        </Routes>
-
-      </Router>
-
-    </AuthProvider>
+    </Router>
 
   );
 

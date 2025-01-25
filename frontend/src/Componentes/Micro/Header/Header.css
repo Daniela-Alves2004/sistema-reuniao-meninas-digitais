@@ -7,6 +7,30 @@ header{
     justify-content: space-between;
     align-items: center;
     border-bottom: 5px solid #e9ecef;
-    width: 90vw;
+    width: 80vw;
+    padding: 20px 0;
+
+}
+
+header .divIcons{
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+
+}
+
+header .divIcons img{
+
+    transition: all 0.3s;
+    margin: 0 0 0 25px  ;
+
+}
+
+header .divIcons img:hover{
+
+    cursor: pointer;
+    transform: scale(1.1);
 
 }

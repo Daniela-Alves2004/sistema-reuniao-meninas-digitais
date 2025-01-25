@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
-import './Home.css';
+
+import '../styles/Home.css';
 
 // Componentes micros
-import Header from '../../../micro/Header/Header';
+import Header from '../../micro/Header/Header';
 
 // Importando a biblioteca de calendário
 import Calendar from 'react-calendar';
@@ -16,31 +17,28 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 
-// Importando Toast
-
 const HomeAdmin = () => {
+
   const [date, setDate] = useState(new Date());
   const [showPopup, setShowPopup] = useState(false);
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
   const [showAddMeetingPopup, setShowAddMeetingPopup] = useState(false);
+  const [showAddMinutesPopup, setShowAddMinutesPopup] = useState(false);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
 
+  // Função para buscar as reuniões do dia
   const handleDateChange = async (newDate) => {
     setDate(newDate);
     setShowPopup(true);
     setError(null);
-
     try {
       const formattedDate = newDate.toISOString().split('T')[0];
-      console.log('formattedDate:', formattedDate);
-
       const response = await axios.get(`http://localhost:3000/api/meetings/getMeetingByDate`, {
         params: { date: formattedDate },
       });
-
       setMeetingData(response.data);
     } catch (error) {
       console.error('Erro ao buscar dados da reunião:', error);
@@ -49,22 +47,23 @@ const HomeAdmin = () => {
     }
   };
 
+  // Função para fechar o pop-up
   const closePopup = () => {
     setShowPopup(false);
     setShowDetailsPopup(false);
     setShowAddMeetingPopup(false);
+    setShowAddMinutesPopup(false);
   };
 
+  // Função para abrir os detalhes da reunião
   const openMeetingDetails = async (meeting) => {
     setSelectedMeeting(meeting);
     setShowPopup(false);
     setShowDetailsPopup(true);
-
     try {
       const response = await axios.get('http://localhost:3000/api/locations/getLocationByMeeting', {
         params: { meetingId: meeting.id },
       });
-
       setSelectedMeeting((prevState) => ({
         ...prevState,
         location: response.data.location,
@@ -78,12 +77,11 @@ const HomeAdmin = () => {
     }
   };
 
+  // Função para abrir o pop-up de adicionar reunião
   const handleAddMeetingClick = async () => {
     setShowPopup(false);
     setShowAddMeetingPopup(true);
-
     try {
-      // Busca as localizações disponíveis
       const response = await axios.get('http://localhost:3000/api/locations/getAllLocations');
       setLocations(response.data.locations || []);
     } catch (error) {
@@ -96,29 +94,22 @@ const HomeAdmin = () => {
   // Função para enviar os dados do formulário para a rota de criação
   const handleAddMeetingSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const pauta = formData.get("pauta");
+    const hora_reuniao = formData.get("hora_reuniao");
     const data_reuniao = formData.get("data_reuniao");
     const id_local = formData.get("meetingLocation");
-
     try {
       const response = await axios.post("http://localhost:3000/api/meetings/createMeeting", {
         pauta,
+        hora_reuniao,
         data_reuniao,
         id_local,
       });
-
       if (response.status === 201) {
-
-        // Mostre um toast de sucesso
-        
         toast.success('Reunião criada com sucesso!', {
-
           autoClose: 3000,
-
         });
-
         closePopup();
       }
     } catch (error) {
@@ -127,6 +118,35 @@ const HomeAdmin = () => {
     }
   };
 
+  // Função para abrir o pop-up de adicionar ata
+  const handleAddMinutesClick = (meeting) => {
+    setSelectedMeeting(meeting);
+    setShowPopup(false);
+    setShowAddMinutesPopup(true);
+  };
+
+  // Função para enviar os dados do formulário para a rota de adicionar ata
+  const handleAddMinutesSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const ata = formData.get('ata');
+    const meetingId = selectedMeeting.id;
+    try {
+      const response = await axios.post('http://localhost:3000/api/minutes/createMinutes', {
+        id_reuniao: meetingId,
+        conteudo: ata,
+      });
+      if (response.status === 201) {
+        toast.success('Ata adicionada com sucesso!', {
+          autoClose: 3000,
+        });
+        closePopup();
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar ata:', error);
+      alert('Erro ao adicionar ata. Tente novamente.');
+    }
+  };
 
   return (
 
@@ -138,18 +158,13 @@ const HomeAdmin = () => {
         <Calendar onChange={handleDateChange} value={date} />
       </div>
 
+      {/* Pop-Up para visualizar as reuniões do dia. */}
       <Dialog open={showPopup} onClose={closePopup}>
-
         <DialogContent>
-
           {error ? (
-
             <p>{error}</p>
-
           ) : meetingData && meetingData.meetings && meetingData.meetings.length > 0 ? (
-
             <div>
-
               <p>
                 {new Date(
                   new Date(meetingData.meetings[0].data_reuniao).setDate(
@@ -160,52 +175,54 @@ const HomeAdmin = () => {
                   month: 'long',
                 })}
               </p>
-
-              <p>Reuniões do dia:</p>
-
               <ul>
-
                 {meetingData.meetings.map((meeting, index) => (
-
                   <li key={index} onClick={() => openMeetingDetails(meeting)}>
-
                     {meeting.pauta}
-
                   </li>
-
                 ))}
-
               </ul>
-
               <Button onClick={handleAddMeetingClick}>+</Button>
-
             </div>
           ) : (
-
             <div>
-
               <p>Nenhuma reunião encontrada para esta data.</p>
-
               <Button onClick={handleAddMeetingClick}>+</Button>
-
             </div>
           )}
         </DialogContent>
       </Dialog>
 
-      {/* Pop-Up para visualizar as informações de uma reunião. */}
+      {/* Pop-Up para adicionar uma ata */}
+      <Dialog open={showAddMinutesPopup} onClose={closePopup}>
+        <DialogContent>
+          <form onSubmit={handleAddMinutesSubmit}>
+            <div>
+              <label htmlFor="ata">Conteúdo da Ata:</label>
+              <textarea id="ata" name="ata" rows="4" required />
+            </div>
+            <Button type="submit">Salvar Ata</Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Pop-Up para visualizar os detalhes da reunião */}
       <Dialog open={showDetailsPopup} onClose={closePopup}>
         <DialogContent>
           {selectedMeeting ? (
             <div>
-              <p>
-                <strong>Pauta:</strong> {selectedMeeting.pauta}
-              </p>
-
               {selectedMeeting.location ? (
-
                 <div>
-
+                  <p>
+                    <strong>Pauta:</strong> {selectedMeeting.pauta}
+                  </p>
+                  <p>
+                    <strong>Hora da Reunião: </strong>
+                    {new Date(`1970-01-01T${selectedMeeting.hora_reuniao}`).toLocaleTimeString('pt-BR', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
                   {selectedMeeting.location.sala ? (
                     <p>
                       <strong>Local:</strong> {selectedMeeting.location.sala}
@@ -215,11 +232,9 @@ const HomeAdmin = () => {
                       <strong>Local:</strong> Sala não disponível.
                     </p>
                   )}
-
                   <p>
                     <strong>Tipo:</strong> {selectedMeeting.location.tipo}
                   </p>
-
                   {selectedMeeting.location.link ? (
                     <p>
                       <strong>Link:</strong>{' '}
@@ -238,6 +253,12 @@ const HomeAdmin = () => {
                   <strong>Local não disponível.</strong>
                 </p>
               )}
+
+              <Button onClick={() => {
+                closePopup();
+                handleAddMinutesClick(selectedMeeting);
+              }}>Adicionar Ata</Button>
+
             </div>
           ) : (
             <p>Detalhes não disponíveis.</p>
@@ -250,7 +271,7 @@ const HomeAdmin = () => {
         <DialogContent>
           <form onSubmit={handleAddMeetingSubmit}>
             <div>
-              <label htmlFor="pauta">Pauta da Reunião:</label>
+              <label htmlFor="pauta">Pauta:</label>
               <input type="text" id="pauta" name="pauta" required />
             </div>
             <div>
@@ -264,12 +285,22 @@ const HomeAdmin = () => {
                 required
               />
             </div>
+
+            <div>
+              <label htmlFor="hora_reuniao">Hora:</label>
+              <input
+                type="time"
+                id="hora_reuniao"
+                name="hora_reuniao"
+                required
+              />
+            </div>
             <div>
               <label htmlFor="meetingLocation">Local:</label>
               <select id="meetingLocation" name="meetingLocation" required>
                 <option value="" disabled selected>Selecione um local</option>
                 {locations.map((location) => {
-                  const isRemoto = !!location.link; 
+                  const isRemoto = !!location.link;
                   const displayName = isRemoto
                     ? `Remoto - ${location.link}`
                     : `Presencial - ${location.sala || 'Sala não especificada'}`;
@@ -281,17 +312,17 @@ const HomeAdmin = () => {
                 })}
               </select>
             </div>
-
             <Button type="submit">Adicionar</Button>
           </form>
         </DialogContent>
       </Dialog>
 
       <ToastContainer />
-
+      
     </div>
 
   );
+
 };
 
 export default HomeAdmin;
