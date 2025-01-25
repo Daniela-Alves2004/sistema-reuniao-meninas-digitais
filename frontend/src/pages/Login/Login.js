@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logoBranca from '../../assets/logos/logoBranca.png';
-import Botao from '../../componentes/micro/Botao/Botao';
+import Botao from '../../componentes/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 require('./Login.css');
 
@@ -36,6 +37,8 @@ const Login = () => {
 
       if (response.data.papel === 'Membro') {
 
+        Cookies.set('authToken', response.data.token, { expires: 1 });
+
         toast.success('Login bem-sucedido!', {
 
           autoClose: 1000,
@@ -46,13 +49,15 @@ const Login = () => {
 
       } else if ((response.data.papel === 'Lider') || (response.data.papel === 'Coordenadora')) {
 
+        Cookies.set('authToken', response.data.token, { expires: 1 });
+
         toast.success('Login bem-sucedido!', {
 
           autoClose: 1000,
 
         });
 
-        setTimeout(() => {navigate('/admin/home');}, 1000);
+        setTimeout(() => {navigate('/home');}, 1000);
 
       }
         

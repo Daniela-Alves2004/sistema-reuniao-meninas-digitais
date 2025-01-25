@@ -46,22 +46,6 @@ exports.loginUser = async (req, res) => {
 
     const token = jwt.sign({ user_id: user.user_id, papel: user.papel }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.cookie('authToken', token, {
-
-      httpOnly: true,
-
-      secure: false,
-
-      sameSite: 'strict',
-
-      maxAge: 3600000, // 1 hora
-
-      domain: 'localhost',
-
-      path: '/',
-
-    });
-
     res.json({
 
       token,

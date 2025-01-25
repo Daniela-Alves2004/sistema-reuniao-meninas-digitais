@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 
-import '../styles/Home.css';
-
-// Componentes micros
-import Header from '../../micro/Header/Header';
+// Componentes
+import Header from '../../componentes/Header/Header';
 
 // Importando a biblioteca de calendário
 import Calendar from 'react-calendar';
@@ -17,7 +15,12 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 
-const HomeAdmin = () => {
+// Importanto a função para verificar o token
+import { getDecodedToken } from '../../utils/cookies';
+
+require('./Home.css');
+
+const Home = () => {
 
   const [date, setDate] = useState(new Date());
   const [showPopup, setShowPopup] = useState(false);
@@ -28,6 +31,8 @@ const HomeAdmin = () => {
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
+
+  console.log(getDecodedToken());
 
   // Função para buscar as reuniões do dia
   const handleDateChange = async (newDate) => {
@@ -182,12 +187,20 @@ const HomeAdmin = () => {
                   </li>
                 ))}
               </ul>
-              <Button onClick={handleAddMeetingClick}>+</Button>
+
+              {getDecodedToken()?.papel.trim() === 'Lider' && (
+                <Button onClick={handleAddMeetingClick}>+</Button>
+              )}
+
             </div>
           ) : (
             <div>
               <p>Nenhuma reunião encontrada para esta data.</p>
-              <Button onClick={handleAddMeetingClick}>+</Button>
+
+              {getDecodedToken()?.papel.trim() === 'Lider' && (
+                <Button onClick={handleAddMeetingClick}>+</Button>
+              )}
+
             </div>
           )}
         </DialogContent>
@@ -254,10 +267,13 @@ const HomeAdmin = () => {
                 </p>
               )}
 
-              <Button onClick={() => {
-                closePopup();
-                handleAddMinutesClick(selectedMeeting);
-              }}>Adicionar Ata</Button>
+              {/* Botão para adicionar ata - Somente para Lideres */}
+              {getDecodedToken()?.papel.trim() === 'Lider' && (
+                <Button onClick={() => {
+                  closePopup();
+                  handleAddMinutesClick(selectedMeeting);
+                }}>Adicionar Ata</Button>
+              )}
 
             </div>
           ) : (
@@ -318,11 +334,11 @@ const HomeAdmin = () => {
       </Dialog>
 
       <ToastContainer />
-      
+
     </div>
 
   );
 
 };
 
-export default HomeAdmin;
+export default Home;

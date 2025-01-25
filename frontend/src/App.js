@@ -5,12 +5,7 @@ import './App.css';
 // Páginas para qualquer tipo de Usuária
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
-
-// Páginas da Usuária Normal
-import Home from './componentes/macro/normal/Home';
-
-// Páginas da Usuária Administradora
-import HomeAdmin from './componentes/macro/admin/Home';
+import Home from './pages/Home/Home';
 
 function App() {
 
@@ -28,7 +23,6 @@ function App() {
 
         {/* Rota protegida */}
         <Route path="/home" element={<Home />} />
-        <Route path="/admin/home" element={<HomeAdmin />} />
 
       </Routes>
 

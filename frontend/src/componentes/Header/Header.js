@@ -1,24 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logoBranca from '../../../assets/logos/logoBranca.png';
-import user from '../../../assets/icons/user.svg';
-import notificationNull from '../../../assets/icons/notificationNull.svg';
-import exit from '../../../assets/icons/exit.svg';
+import logoBranca from '../../assets/logos/logoBranca.png';
+import user from '../../assets/icons/user.svg';
+import notificationNull from '../../assets/icons/notificationNull.svg';
+import exit from '../../assets/icons/exit.svg';
+
+import { removeAuthTokenFromCookies } from "../../utils/cookies";
 
 import "./Header.css";
 
 function Header() {
+
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    document.cookie.split(";").forEach((c) => {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-
-    navigate("/");
-  };
 
   return (
     <header>
@@ -49,7 +42,7 @@ function Header() {
           alt="Ícone de sair"
           width={40}
           height={40}
-          onClick={handleLogout}
+          onClick={() => { removeAuthTokenFromCookies(); navigate('/'); }}
         />
       </div>
     </header>
