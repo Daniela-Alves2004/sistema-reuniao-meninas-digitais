@@ -1,9 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
+
 const sequelize = require('../config/database');
+
+const Meeting = require('./Meeting');
 
 class Minutes extends Model { }
 
-// Modelo de ata
 Minutes.init({
 
     id:{
@@ -24,15 +26,7 @@ Minutes.init({
 
     },
 
-    arquivos: {
-
-        type: DataTypes.STRING,
-
-        allowNull: true
-
-    },
-
-    id_usuario: {
+    id_reuniao: {
 
         type: DataTypes.INTEGER,
 
@@ -40,20 +34,26 @@ Minutes.init({
 
         references: {
 
-            model: 'Usuario',
+            model: 'Meeting',
 
             key: 'id'
 
         }
 
-    },
+    }
     
 }, {
 
     sequelize,
 
-    modelName: 'Ata',
+    modelName: 'Minute',
 
     tableName: 'Ata',
 
+    timestamps: false
+
 });
+
+Minutes.belongsTo(Meeting, { foreignKey: 'id_reuniao', as: 'meeting' });
+
+module.exports = Minutes;

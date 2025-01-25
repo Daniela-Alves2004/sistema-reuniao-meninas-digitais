@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import logoBranca from '../../../../assets/logos/logoBranca.png';
-import Botao from '../../../micro/Botao/Botao';
+import logoBranca from '../../assets/logos/logoBranca.png';
+import Botao from '../../componentes/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import './Cadastro.css';
+
+require('./Cadastro.css');
 
 function Cadastrar() {
+  
   const [primeiroNome, setPrimeiroNome] = useState('');
   const [ultimoNome, setUltimoNome] = useState('');
   const [email, setEmail] = useState('');

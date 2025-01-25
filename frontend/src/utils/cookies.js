@@ -1,41 +1,68 @@
+import Cookies from 'js-cookie';
+
 // Recupera o valor de um cookie pelo nome
 export function getAuthTokenFromCookies() {
-
-    const cookies = document.cookie.split(';');
-
-    for (let cookie of cookies) {
-
-        const [name, value] = cookie.trim().split('=');
-
-        if (name === 'authToken') {
-
-            return value;
-
-        }
-
+    const token = Cookies.get('authToken');
+    if (!token) {
+        console.warn('authToken não encontrado nos cookies.');
     }
-
-    return null; 
-
+    return token || null;
 }
 
 // Remove o valor de um cookie pelo nome
 export function removeAuthTokenFromCookies() {
+    Cookies.remove('authToken', { path: '/' });
+    console.info('authToken removido dos cookies.');
+}
 
-    const cookies = document.cookie.split(';');
+// Verifica se o token de autenticação é válido
+export function isAuthTokenValid() {
+    const authToken = getAuthTokenFromCookies();
 
-    for (let cookie of cookies) {
+    if (authToken) {
+        try {
+            const parts = authToken.split('.');
+            if (parts.length !== 3) {
+                console.error('Formato inválido do token de autenticação.');
+                return false;
+            }
 
-        const [name] = cookie.trim().split('=');
+            const [, payload] = parts;
+            const data = JSON.parse(atob(payload));
+            const exp = new Date(data.exp * 1000);
 
-        if (name === 'authToken') {
+            if (exp <= new Date()) {
+                console.warn('Token expirado.');
+                return false;
+            }
 
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-
-            return;
-
+            return true;
+        } catch (error) {
+            console.error('Erro ao verificar o token:', error);
         }
-
     }
 
+    return false;
+}
+
+// Retorna os dados criptografados do token de autenticação
+export function getDecodedToken() {
+    const authToken = getAuthTokenFromCookies();
+
+    if (authToken) {
+        try {
+            const parts = authToken.split('.');
+            if (parts.length !== 3) {
+                console.error('Formato inválido do token.');
+                return null;
+            }
+
+            const [, payload] = parts;
+            return JSON.parse(atob(payload));
+        } catch (error) {
+            console.error('Erro ao decodificar o token:', error);
+        }
+    }
+
+    return null;
 }

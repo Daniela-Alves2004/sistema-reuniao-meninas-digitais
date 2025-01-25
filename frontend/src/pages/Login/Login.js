@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import logoBranca from '../../../../assets/logos/logoBranca.png';
-import Botao from '../../../micro/Botao/Botao';
+import logoBranca from '../../assets/logos/logoBranca.png';
+import Botao from '../../componentes/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../../contexts/AuthContext';
+import Cookies from 'js-cookie';
+
 require('./Login.css');
 
 const Login = () => {
@@ -15,8 +16,6 @@ const Login = () => {
   const [senha, setSenha] = useState('');
 
   const navigate = useNavigate();
-
-  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
 
@@ -38,27 +37,27 @@ const Login = () => {
 
       if (response.data.papel === 'Membro') {
 
+        Cookies.set('authToken', response.data.token, { expires: 1 });
+
         toast.success('Login bem-sucedido!', {
 
           autoClose: 1000,
 
         });
-
-        setIsLoggedIn(true);
 
         setTimeout(() => {navigate('/home');}, 1000);
 
       } else if ((response.data.papel === 'Lider') || (response.data.papel === 'Coordenadora')) {
 
+        Cookies.set('authToken', response.data.token, { expires: 1 });
+
         toast.success('Login bem-sucedido!', {
 
           autoClose: 1000,
 
         });
 
-        setIsLoggedIn(true);
-
-        setTimeout(() => {navigate('/admin/home');}, 1000);
+        setTimeout(() => {navigate('/home');}, 1000);
 
       }
         
