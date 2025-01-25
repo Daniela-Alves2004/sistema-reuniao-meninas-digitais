@@ -16,7 +16,7 @@ import { Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 
 // Importanto a função para verificar o token
-import { getDecodedToken } from '../../utils/cookies';
+import { getDecodedToken, getAuthTokenFromCookies } from '../../utils/cookies';
 
 require('./Home.css');
 
@@ -31,8 +31,6 @@ const Home = () => {
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
-
-  console.log(getDecodedToken());
 
   // Função para buscar as reuniões do dia
   const handleDateChange = async (newDate) => {
@@ -136,10 +134,15 @@ const Home = () => {
     const formData = new FormData(event.target);
     const ata = formData.get('ata');
     const meetingId = selectedMeeting.id;
+    const token = getAuthTokenFromCookies();
     try {
       const response = await axios.post('http://localhost:3000/api/minutes/createMinutes', {
         id_reuniao: meetingId,
         conteudo: ata,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.status === 201) {
         toast.success('Ata adicionada com sucesso!', {

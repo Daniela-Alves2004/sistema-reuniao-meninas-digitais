@@ -5,27 +5,37 @@ dotenv.config();
 
 // Middleware para autenticação de rotas
 module.exports = (req, res, next) => {
-
-  const token = req.headers['authorization']; // Obter token do cabeçalho
+  
+  const token = req.headers['authorization'];
 
   if (!token) {
-    
-    return res.status(401).json({ error: 'Acesso negado' }); // Verificar se o token foi enviado
+
+    return res.status(401).json({ error: 'Acesso negado' });
 
   }
+
+  const tokenParts = token.split(' ');
+
+  if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+
+    return res.status(400).json({ error: 'Token mal formado' });
+
+  }
+
+  const jwtToken = tokenParts[1];
 
   try {
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET); // Verificar se o token é válido
+    const verified = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
-    req.user = verified; // Adicionar o usuário ao objeto de requisição
+    req.user = verified;
 
-    next(); // Continuar a execução
+    next();
 
-  } catch (error) {
-
-    res.status(400).json({ error: 'Token inválido' }); // Retornar erro caso o token seja inválido
-
+  } catch (error) 
+  {
+    res.status(400).json({ error: 'Token inválido' });
   }
-  
+
+
 };
