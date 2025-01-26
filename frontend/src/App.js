@@ -6,6 +6,7 @@ import './App.css';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
 import Home from './pages/Home/Home';
+import Perfil from './pages/Perfil/Perfil';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
 
         {/* Rota protegida */}
         <Route path="/home" element={<Home />} />
+        <Route path="/perfil" element={<Perfil />} />
 
       </Routes>
 
