@@ -4,6 +4,7 @@ import logoBranca from '../../assets/logos/logoBranca.png';
 import user from '../../assets/icons/user.svg';
 import notificationNull from '../../assets/icons/notificationNull.svg';
 import exit from '../../assets/icons/exit.svg';
+import home from '../../assets/icons/home.svg';
 
 import { removeAuthTokenFromCookies } from "../../utils/cookies";
 
@@ -23,11 +24,13 @@ function Header() {
       />
 
       <div className="divIcons">
+
         <img
-          src={notificationNull}
-          alt="Ícone de notificação"
+          src={home}
+          alt="Pãgina home"
           width={40}
           height={40}
+          onClick={() => { navigate('/home') }}
         />
 
         <img
@@ -35,6 +38,14 @@ function Header() {
           alt="Ícone de usuário"
           width={30}
           height={30}
+          onClick={() => { navigate('/perfil') }}
+        />
+
+        <img
+          src={notificationNull}
+          alt="Ícone de notificação"
+          width={40}
+          height={40}
         />
 
         <img
@@ -44,6 +55,7 @@ function Header() {
           height={40}
           onClick={() => { removeAuthTokenFromCookies(); navigate('/'); }}
         />
+
       </div>
     </header>
   );

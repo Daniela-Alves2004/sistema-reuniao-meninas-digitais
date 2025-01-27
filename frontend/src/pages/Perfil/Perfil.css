@@ -1,6 +1,5 @@
 .perfil-container-wrapper {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     flex-direction: column;
     width: 100vw;
