@@ -24,14 +24,6 @@ app.use('/api/meetings', meetingRoutes); // Rota para reuniões
 app.use('/api/locations', locationRoutes); // Rota para locais
 app.use('/api/minutes', minutesRoutes); // Rota para atas
 
-// Servir arquivos estáticos do frontend diretamente
-app.use(express.static('path/to/frontend/build'));
-
-// Redirecionar todas as outras solicitações para o arquivo principal do frontend
-app.get('*', (req, res) => {
-  res.sendFile('path/to/frontend/build/index.html', { root: __dirname });
-});
-
 const PORT = process.env.PORT || 3000; // Porta do servidor
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`)); // Inicia o servidor

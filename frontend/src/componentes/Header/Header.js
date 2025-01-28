@@ -6,13 +6,15 @@ import notificationNull from '../../assets/icons/notificationNull.svg';
 import exit from '../../assets/icons/exit.svg';
 import home from '../../assets/icons/home.svg';
 
-import { removeAuthTokenFromCookies } from "../../utils/cookies";
+import { removeAuthTokenFromCookies, getDecodedToken } from "../../utils/cookies";
 
 import "./Header.css";
 
 function Header() {
 
   const navigate = useNavigate();
+
+  console.log(getDecodedToken());
 
   return (
     <header>
@@ -27,19 +29,33 @@ function Header() {
 
         <img
           src={home}
-          alt="Pãgina home"
+          alt="Página home"
           width={40}
           height={40}
           onClick={() => { navigate('/home') }}
         />
 
-        <img
-          src={user}
-          alt="Ícone de usuário"
-          width={30}
-          height={30}
-          onClick={() => { navigate('/perfil') }}
-        />
+        {(getDecodedToken().papel === 'Lider') ? (
+
+          <img
+            src={user}
+            alt="Ícone de usuário"
+            width={30}
+            height={30}
+            onClick={() => { navigate('/perfil-admin') }}
+          />
+
+        ) : (
+
+          <img
+            src={user}
+            alt="Ícone de usuário"
+            width={30}
+            height={30}
+            onClick={() => { navigate('/perfil-usuario') }}
+          />
+
+        )}
 
         <img
           src={notificationNull}
