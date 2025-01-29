@@ -18,3 +18,17 @@ exports.createInvitation = async (req, res) => {
   }
 
 };
+
+// Função para listar todos os convites através do id da reunião
+exports.getInvitationsByMeetingId = async (req, res) => {
+  const { id_reuniao } = req.params;
+  console.log(id_reuniao); // Verifique se o id está sendo passado corretamente
+
+  try {
+    const invitations = await Invitation.findAll({ where: { id_reuniao } });
+    console.log(invitations); // Verifique a estrutura dos dados retornados
+    res.json(invitations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

@@ -85,14 +85,35 @@ const Home = () => {
         ...prevState,
         location: response.data.location,
       }));
+
       // Buscar as atas da reunião
       const minutesResponse = await axios.get(`http://localhost:3000/api/minutes/listMinutesByMeeting/${meeting.id}`);
       setMeetingMinutes(minutesResponse.data || []);
+
+      // Buscar os convidados
+      const invitationResponse = await axios.get('http://localhost:3000/api/invitations/getInvitationsByMeetingId/' + meeting.id);
+
+      const invitedUserIds = invitationResponse.data.map(invitation => invitation.id_usuario);
+
+      // Agora, buscamos os detalhes dos usuários convidados
+      const usersDetails = await Promise.all(
+        invitedUserIds.map(async (userId) => {
+          const userResponse = await axios.get(`http://localhost:3000/api/users/getUserById/${userId}`);
+          return userResponse.data; // Aqui você retorna os detalhes do usuário
+        })
+      );
+
+      console.log(usersDetails); // Mostra os detalhes dos usuários convidados
+      setSelectedMeeting((prevState) => ({
+        ...prevState,
+        invitedUsers: usersDetails, // Lista de usuários convidados com detalhes
+      }));
     } catch (error) {
-      console.error('Error fetching meeting location:', error);
+      console.error('Erro ao buscar detalhes da reunião:', error);
       setSelectedMeeting((prevState) => ({
         ...prevState,
         location: null,
+        invitedUsers: [], // Caso ocorra um erro, inicialize como uma lista vazia
       }));
     }
   };
@@ -128,6 +149,7 @@ const Home = () => {
     const id_local = formData.get("meetingLocation");
 
     try {
+      // Criação da reunião
       const response = await axios.post("http://localhost:3000/api/meetings/createMeeting", {
         pauta,
         hora_reuniao,
@@ -137,9 +159,27 @@ const Home = () => {
       });
 
       if (response.status === 201) {
-        toast.success('Reunião criada e convites enviados!', {
-          autoClose: 3000,
-        });
+        toast.success('Reunião criada!', { autoClose: 3000 });
+
+        // Agora enviaremos os convites para os usuários
+        for (const userId of selectedUsers) {
+          try {
+
+            console.log(response.data.meeting.id);
+
+            const invitationResponse = await axios.post("http://localhost:3000/api/invitations/createInvitation", {
+              id_usuario: userId,  // O ID do usuário convidado
+              id_reuniao: response.data.meeting.id,  // O ID da reunião criada
+            });
+
+            if (invitationResponse.status === 201) {
+              console.log(`Convite enviado para o usuário ${userId}`);
+            }
+          } catch (invitationError) {
+            console.error(`Erro ao enviar convite para o usuário ${userId}:`, invitationError);
+          }
+        }
+
         closePopup();
       }
     } catch (error) {
@@ -147,7 +187,6 @@ const Home = () => {
       alert("Ocorreu um erro ao criar a reunião. Tente novamente.");
     }
   };
-
 
   // Função para abrir o pop-up de adicionar ata
   const handleAddMinutesClick = (meeting) => {
@@ -312,6 +351,22 @@ const Home = () => {
                 )}
               </div>
 
+              {/* Lista de Convidados */}
+              <div className="divConvidados">
+                <h3>Convidados:</h3>
+                {selectedMeeting.invitedUsers && selectedMeeting.invitedUsers.length > 0 ? (
+                  <ul>
+                    {selectedMeeting.invitedUsers.map((user, index) => (
+                      <li key={index}>
+                        {user.primeiro_nome} {user.ultimo_nome}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Não há convidados para esta reunião.</p>
+                )}
+
+              </div>
 
               {/* Botão para adicionar ata - Somente para Lideres */}
               {getDecodedToken()?.papel.trim() === 'Lider' && (
@@ -320,13 +375,13 @@ const Home = () => {
                   handleAddMinutesClick(selectedMeeting);
                 }}></Botao>
               )}
-
             </div>
           ) : (
             <p>Detalhes não disponíveis.</p>
           )}
         </DialogContent>
       </Dialog>
+
 
       {/* Pop-Up para inserir as informações da reunião e adicionar ela. */}
       <Dialog open={showAddMeetingPopup} onClose={closePopup}>

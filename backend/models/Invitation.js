@@ -58,6 +58,8 @@ Invitation.init({
 
     tableName: 'Convite',
 
+    timestamps: false
+
 });
 
 Invitation.belongsTo(Meeting, { foreignKey: 'id_reuniao', as: 'meeting' });

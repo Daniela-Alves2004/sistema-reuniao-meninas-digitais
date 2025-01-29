@@ -116,3 +116,30 @@ exports.getAllUsers = async (req, res) => {
   }
 
 };
+
+// Função para resgatar um usuário pelo id
+exports.getUserById = async (req, res) => {
+
+  const { id } = req.params;
+
+  try {
+
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ['senha'] }
+    });
+
+    if (!user) {
+
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    }
+
+    res.json(user);
+
+  } catch (error) {
+
+    res.status(500).json({ error: error.message });
+
+  }
+
+}
