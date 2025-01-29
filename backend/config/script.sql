@@ -72,11 +72,11 @@ INSERT INTO "Setor" ("nome") VALUES ('Marketing');
 INSERT INTO "Setor" ("nome") VALUES ('Gestão de Pessoas');
 INSERT INTO "Setor" ("nome") VALUES ('Conteúdo');
 INSERT INTO "Setor" ("nome") VALUES ('Instrutores');
-INSERT INTO "Setor" ("nome") VALUES ('Professores');
+INSERT INTO "Setor" ("nome") VALUES ('Coordenação');
 
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2465710, 'Brena', 'Santos', 'Lider', 'brenas@gmail.com', '11999999999', 'brena123', 1);
-INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (123457, 'João', 'Botter', 'Membro', 'joao@gmail.com', '11999999999', '123456', 2);
-INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (123458, 'Rosangela', 'Marquesone', 'Coordenadora', 'rosagenla@gmail.com', '11999999999', '123456', 5);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234578, 'João', 'Botter', 'Membro', 'joao@gmail.com', '11999999999', '123456', 2);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234589, 'Rosangela', 'Marquesone', 'Coordenadora', 'rosagenla@gmail.com', '11999999999', '123456', 5);
 
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-123', null);
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-321', null);
@@ -85,17 +85,13 @@ INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K003');
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-18', '14:00', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
+VALUES ('2025-01-28', '14:00', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-19', '15:00', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
+VALUES ('2025-01-29', '15:00', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-20', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
+VALUES ('2025-01-30', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-21', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
-
-INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-22', '18:00', '2025-01-22', 'Inteligência Artificial e o Futuro da Educação: Desafios e Oportunidades no Ensino Personalizado', 5);
-
+VALUES ('2025-01-31', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);

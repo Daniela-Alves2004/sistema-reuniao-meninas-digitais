@@ -198,6 +198,7 @@ const Home = () => {
             </div>
           ) : (
             <div>
+              
               <p>Nenhuma reunião encontrada para esta data.</p>
 
               {getDecodedToken()?.papel.trim() === 'Lider' && (

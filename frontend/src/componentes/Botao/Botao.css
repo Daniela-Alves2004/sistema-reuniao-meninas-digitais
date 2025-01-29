@@ -34,3 +34,41 @@
     color: #91327A;
     cursor: pointer;
 }
+.btDeletarConta{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.btDeletarConta:hover{
+    background-color: white;
+    color: red;
+    cursor: pointer;
+}
+@media only screen and (min-width: 1200px) {
+    .btDeletarConta{
+        padding: 10px 35%;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .btDeletarConta{
+        padding: 10px 30%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .btDeletarConta{
+        padding: 10px 25%;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    .btDeletarConta{
+        padding: 10px 25%;
+    }
+}

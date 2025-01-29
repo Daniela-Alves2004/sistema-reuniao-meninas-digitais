@@ -4,14 +4,17 @@ import logoBranca from '../../assets/logos/logoBranca.png';
 import user from '../../assets/icons/user.svg';
 import notificationNull from '../../assets/icons/notificationNull.svg';
 import exit from '../../assets/icons/exit.svg';
+import home from '../../assets/icons/home.svg';
 
-import { removeAuthTokenFromCookies } from "../../utils/cookies";
+import { removeAuthTokenFromCookies, getDecodedToken } from "../../utils/cookies";
 
 import "./Header.css";
 
 function Header() {
 
   const navigate = useNavigate();
+
+  console.log(getDecodedToken());
 
   return (
     <header>
@@ -23,18 +26,42 @@ function Header() {
       />
 
       <div className="divIcons">
+
+        <img
+          src={home}
+          alt="Página home"
+          width={40}
+          height={40}
+          onClick={() => { navigate('/home') }}
+        />
+
+        {(getDecodedToken().papel === 'Lider') ? (
+
+          <img
+            src={user}
+            alt="Ícone de usuário"
+            width={30}
+            height={30}
+            onClick={() => { navigate('/perfil-admin') }}
+          />
+
+        ) : (
+
+          <img
+            src={user}
+            alt="Ícone de usuário"
+            width={30}
+            height={30}
+            onClick={() => { navigate('/perfil-usuario') }}
+          />
+
+        )}
+
         <img
           src={notificationNull}
           alt="Ícone de notificação"
           width={40}
           height={40}
-        />
-
-        <img
-          src={user}
-          alt="Ícone de usuário"
-          width={30}
-          height={30}
         />
 
         <img
@@ -44,6 +71,7 @@ function Header() {
           height={40}
           onClick={() => { removeAuthTokenFromCookies(); navigate('/'); }}
         />
+
       </div>
     </header>
   );
