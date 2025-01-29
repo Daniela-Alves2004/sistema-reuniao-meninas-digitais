@@ -18,6 +18,8 @@ import { ToastContainer, toast } from 'react-toastify';
 // Importanto a função para verificar o token
 import { getDecodedToken, getAuthTokenFromCookies } from '../../utils/cookies';
 
+import Select from 'react-select';
+
 require('./Home.css');
 
 const Home = () => {
@@ -30,8 +32,19 @@ const Home = () => {
   const [meetingMinutes, setMeetingMinutes] = useState([]);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [users, setUsers] = useState([]); // Lista de usuários disponíveis
+  const [selectedUsers, setSelectedUsers] = useState([]); // Lista de usuários convidados
   const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
+
+  const options = users.map(user => ({
+    value: user.id,
+    label: `${user.primeiro_nome} ${user.ultimo_nome}`
+  }));
+
+  const handleUserChange = (selectedOptions) => {
+    setSelectedUsers(selectedOptions.map(option => option.value));
+  };
 
   // Função para buscar as reuniões do dia
   const handleDateChange = async (newDate) => {
@@ -89,12 +102,19 @@ const Home = () => {
     setShowPopup(false);
     setShowAddMeetingPopup(true);
     try {
-      const response = await axios.get('http://localhost:3000/api/locations/getAllLocations');
-      setLocations(response.data.locations || []);
+      // Buscar locais
+      const responseLocations = await axios.get('http://localhost:3000/api/locations/getAllLocations');
+      setLocations(responseLocations.data.locations || []);
+
+      // Buscar usuários disponíveis
+      const responseUsers = await axios.get('http://localhost:3000/api/users/getAllUsers');
+      setUsers(responseUsers.data || []);
+
     } catch (error) {
-      console.error('Erro ao buscar locais:', error);
+      console.error('Erro ao buscar locais ou usuários:', error);
       setLocations([]);
-      alert('Erro ao buscar locais. Tente novamente mais tarde.');
+      setUsers([]);
+      alert('Erro ao buscar dados. Tente novamente mais tarde.');
     }
   };
 
@@ -106,15 +126,18 @@ const Home = () => {
     const hora_reuniao = formData.get("hora_reuniao");
     const data_reuniao = formData.get("data_reuniao");
     const id_local = formData.get("meetingLocation");
+
     try {
       const response = await axios.post("http://localhost:3000/api/meetings/createMeeting", {
         pauta,
         hora_reuniao,
         data_reuniao,
         id_local,
+        convidados: selectedUsers, // Adicionamos os usuários convidados
       });
+
       if (response.status === 201) {
-        toast.success('Reunião criada com sucesso!', {
+        toast.success('Reunião criada e convites enviados!', {
           autoClose: 3000,
         });
         closePopup();
@@ -124,6 +147,7 @@ const Home = () => {
       alert("Ocorreu um erro ao criar a reunião. Tente novamente.");
     }
   };
+
 
   // Função para abrir o pop-up de adicionar ata
   const handleAddMinutesClick = (meeting) => {
@@ -349,6 +373,51 @@ const Home = () => {
                   );
                 })}
               </select>
+            </div>
+            <div>
+              <label htmlFor="meetingUsers">Convidar Usuários:</label>
+              <Select
+                id="meetingUsers"
+                options={options}
+                isMulti
+                placeholder="Selecione os usuários..."
+                value={options.filter(option => selectedUsers.includes(option.value))}
+                onChange={handleUserChange}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    borderRadius: '8px',
+                    borderColor: '#fff',
+                    boxShadow: 'none',
+                    '&:hover': { borderColor: '#000' },
+                  }),
+                  menu: (base) => ({
+                    ...base,
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    display: 'block',
+                  }),
+                  menuList: () => ({
+                    padding: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }),
+                  option: (base, { isFocused, isSelected }) => ({
+                    ...base,
+                    backgroundColor: isSelected ? "#ddd" : isFocused ? "#eee" : "#fff",
+                    color: "#000",
+                    padding: "10px",
+                    textAlign: "left",
+                  }),
+                  multiValueLabel: (base) => ({
+                    ...base,
+                    color: "#000",
+                  }),
+                }}
+              />
+
             </div>
             <Botao texto={"+"} className="btAdicionar" type="submit"></Botao>
           </form>

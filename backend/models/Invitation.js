@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Meeting = require('./Meeting');
+const User = require('./User');
 
 class Invitation extends Model { }
 
@@ -52,10 +54,14 @@ Invitation.init({
 
     sequelize,
 
-    modelName: 'Convite',
+    modelName: 'Inivitation',
 
     tableName: 'Convite',
 
 });
 
+Invitation.belongsTo(Meeting, { foreignKey: 'id_reuniao', as: 'meeting' });
+Invitation.belongsTo(User, { foreignKey: 'id_usuario', as: 'user' });
+
+module.exports = Invitation;
 
