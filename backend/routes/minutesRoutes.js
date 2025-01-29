@@ -4,5 +4,6 @@ const router = express.Router();
 const authenticate = require('../middlewares/authenticate');
 
 router.post('/createMinutes', authenticate, minutesController.createMinutes);
+router.get('/listMinutesByMeeting/:id', minutesController.listMinutesByMeeting);
 
 module.exports = router;

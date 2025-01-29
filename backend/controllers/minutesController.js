@@ -26,3 +26,24 @@ exports.createMinutes = async (req, res) => {
     }
 
 }
+
+// Função para listar ata utilizando o id da reunião
+exports.listMinutesByMeeting = async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const minutes = await Minutes.findAll({ where: { id_reuniao: id } });
+
+        res.status(200).json(minutes);
+
+    } catch (error) {
+
+        console.error('Error listing minutes:', error);
+
+        res.status(400).json({ error: error.message });
+
+    }
+
+}
