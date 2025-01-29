@@ -42,10 +42,11 @@
 }
 
 .perfil-container-dados input {
-  padding: 2%;
+  padding: 10px;
   background-color: transparent;
   border: 3px solid white;
   border-radius: 5px;
+  color: white;
 }
 
 .perfil-container-dados-nome,

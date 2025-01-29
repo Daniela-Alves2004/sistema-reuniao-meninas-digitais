@@ -49,7 +49,7 @@ exports.loginUser = async (req, res) => {
       user_id: user.user_id, 
       ra: user.ra, 
       primeiro_nome: user.primeiro_nome, 
-      segundo_nome: user.segundo_nome, 
+      ultimo_nome: user.ultimo_nome, 
       email: user.email, 
       telefone: user.telefone, 
       papel: user.papel, 
