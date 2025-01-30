@@ -1,6 +1,6 @@
-import Header from "../../componentes/Header/Header";
+import Header from "../../components/Header/Header";
 import perfilIcon from "../../assets/icons/user.svg";
-import Botao from "../../componentes/Botao/Botao";
+import Botao from "../../components/Botao/Botao";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getDecodedToken } from "../../utils/cookies";

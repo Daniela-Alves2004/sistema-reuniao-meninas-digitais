@@ -14,8 +14,6 @@ function Header() {
 
   const navigate = useNavigate();
 
-  console.log(getDecodedToken());
-
   return (
     <header>
       <img

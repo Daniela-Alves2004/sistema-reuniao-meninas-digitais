@@ -1,29 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
-
-// Componentes
-import Header from '../../componentes/Header/Header';
-
-// Importando a biblioteca de calendário
+import Header from '../../components/Header/Header';
+import Botao from '../../components/Botao/Botao';
 import Calendar from 'react-calendar';
-
-// Importando componentes do Material-UI
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import axios from 'axios';
-
-import Botao from '../../componentes/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
-
-// Importanto a função para verificar o token
-import { getDecodedToken, getAuthTokenFromCookies } from '../../utils/cookies';
-
+import { getAuthTokenFromCookies, getDecodedToken } from '../../utils/cookies';
+import { getMeetingsByDate, getMeetingDetails, getAllLocations, getAllUsers, createMeeting, sendInvitations, addMinutesToMeeting, getInvitationsByMeeting, getMeetingMinutes, getUserById } from '../../utils/api';
 import Select from 'react-select';
 
 require('./Home.css');
 
 const Home = () => {
-
+  
   const [date, setDate] = useState(new Date());
   const [showPopup, setShowPopup] = useState(false);
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
@@ -32,8 +22,8 @@ const Home = () => {
   const [meetingMinutes, setMeetingMinutes] = useState([]);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
-  const [users, setUsers] = useState([]); // Lista de usuários disponíveis
-  const [selectedUsers, setSelectedUsers] = useState([]); // Lista de usuários convidados
+  const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [locations, setLocations] = useState([]);
   const [error, setError] = useState(null);
 
@@ -46,17 +36,14 @@ const Home = () => {
     setSelectedUsers(selectedOptions.map(option => option.value));
   };
 
-  // Função para buscar as reuniões do dia
   const handleDateChange = async (newDate) => {
     setDate(newDate);
     setShowPopup(true);
     setError(null);
     try {
-      const formattedDate = newDate.toISOString().split('T')[0];
-      const response = await axios.get(`http://localhost:3000/api/meetings/getMeetingByDate`, {
-        params: { date: formattedDate },
-      });
-      setMeetingData(response.data);
+      const response = await getMeetingsByDate(newDate);
+      console.log('response:', response);
+      setMeetingData(response);
     } catch (error) {
       console.error('Erro ao buscar dados da reunião:', error);
       setMeetingData(null);
@@ -64,7 +51,6 @@ const Home = () => {
     }
   };
 
-  // Função para fechar o pop-up
   const closePopup = () => {
     setShowPopup(false);
     setShowDetailsPopup(false);
@@ -72,65 +58,55 @@ const Home = () => {
     setShowAddMinutesPopup(false);
   };
 
-  // Função para abrir os detalhes da reunião
   const openMeetingDetails = async (meeting) => {
     setSelectedMeeting(meeting);
     setShowPopup(false);
     setShowDetailsPopup(true);
     try {
-      const response = await axios.get('http://localhost:3000/api/locations/getLocationByMeeting', {
-        params: { meetingId: meeting.id },
-      });
+      
+      const locationResponse = await getMeetingDetails(meeting.id);
       setSelectedMeeting((prevState) => ({
         ...prevState,
-        location: response.data.location,
+        location: locationResponse.location,
       }));
-
-      // Buscar as atas da reunião
-      const minutesResponse = await axios.get(`http://localhost:3000/api/minutes/listMinutesByMeeting/${meeting.id}`);
+    
+      const minutesResponse = await getMeetingMinutes(meeting.id);
       setMeetingMinutes(minutesResponse.data || []);
-
-      // Buscar os convidados
-      const invitationResponse = await axios.get('http://localhost:3000/api/invitations/getInvitationsByMeetingId/' + meeting.id);
-
+  
+      const invitationResponse = await getInvitationsByMeeting(meeting.id);
       const invitedUserIds = invitationResponse.data.map(invitation => invitation.id_usuario);
-
-      // Agora, buscamos os detalhes dos usuários convidados
+  
       const usersDetails = await Promise.all(
         invitedUserIds.map(async (userId) => {
-          const userResponse = await axios.get(`http://localhost:3000/api/users/getUserById/${userId}`);
-          return userResponse.data; // Aqui você retorna os detalhes do usuário
+          const userResponse = await getUserById(userId);
+          return userResponse.data;
         })
       );
-
-      console.log(usersDetails); // Mostra os detalhes dos usuários convidados
+  
       setSelectedMeeting((prevState) => ({
         ...prevState,
-        invitedUsers: usersDetails, // Lista de usuários convidados com detalhes
+        invitedUsers: usersDetails,
       }));
     } catch (error) {
       console.error('Erro ao buscar detalhes da reunião:', error);
       setSelectedMeeting((prevState) => ({
         ...prevState,
-        location: null,
-        invitedUsers: [], // Caso ocorra um erro, inicialize como uma lista vazia
+        location: null, // Em caso de erro, defina 'location' como null
+        invitedUsers: [],
       }));
     }
   };
+  
 
-  // Função para abrir o pop-up de adicionar reunião
   const handleAddMeetingClick = async () => {
     setShowPopup(false);
     setShowAddMeetingPopup(true);
     try {
-      // Buscar locais
-      const responseLocations = await axios.get('http://localhost:3000/api/locations/getAllLocations');
+      const responseLocations = await getAllLocations();
       setLocations(responseLocations.data.locations || []);
 
-      // Buscar usuários disponíveis
-      const responseUsers = await axios.get('http://localhost:3000/api/users/getAllUsers');
+      const responseUsers = await getAllUsers();
       setUsers(responseUsers.data || []);
-
     } catch (error) {
       console.error('Erro ao buscar locais ou usuários:', error);
       setLocations([]);
@@ -139,7 +115,6 @@ const Home = () => {
     }
   };
 
-  // Função para enviar os dados do formulário para a rota de criação
   const handleAddMeetingSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -149,27 +124,22 @@ const Home = () => {
     const id_local = formData.get("meetingLocation");
 
     try {
-      // Criação da reunião
-      const response = await axios.post("http://localhost:3000/api/meetings/createMeeting", {
+      const response = await createMeeting({
         pauta,
         hora_reuniao,
         data_reuniao,
         id_local,
-        convidados: selectedUsers, // Adicionamos os usuários convidados
+        convidados: selectedUsers,
       });
 
       if (response.status === 201) {
         toast.success('Reunião criada!', { autoClose: 3000 });
 
-        // Agora enviaremos os convites para os usuários
         for (const userId of selectedUsers) {
           try {
-
-            console.log(response.data.meeting.id);
-
-            const invitationResponse = await axios.post("http://localhost:3000/api/invitations/createInvitation", {
-              id_usuario: userId,  // O ID do usuário convidado
-              id_reuniao: response.data.meeting.id,  // O ID da reunião criada
+            const invitationResponse = await sendInvitations({
+              id_usuario: userId,
+              id_reuniao: response.data.meeting.id,
             });
 
             if (invitationResponse.status === 201) {
@@ -188,22 +158,21 @@ const Home = () => {
     }
   };
 
-  // Função para abrir o pop-up de adicionar ata
   const handleAddMinutesClick = (meeting) => {
     setSelectedMeeting(meeting);
     setShowPopup(false);
     setShowAddMinutesPopup(true);
   };
 
-  // Função para enviar os dados do formulário para a rota de adicionar ata
   const handleAddMinutesSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const ata = formData.get('ata');
     const meetingId = selectedMeeting.id;
     const token = getAuthTokenFromCookies();
+
     try {
-      const response = await axios.post('http://localhost:3000/api/minutes/createMinutes', {
+      const response = await addMinutesToMeeting({
         id_reuniao: meetingId,
         conteudo: ata,
       }, {
@@ -211,10 +180,9 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.status === 201) {
-        toast.success('Ata adicionada com sucesso!', {
-          autoClose: 3000,
-        });
+        toast.success('Ata adicionada com sucesso!', { autoClose: 3000 });
         closePopup();
       }
     } catch (error) {
@@ -238,12 +206,12 @@ const Home = () => {
         <DialogContent>
           {error ? (
             <p>{error}</p>
-          ) : meetingData && meetingData.meetings && meetingData.meetings.length > 0 ? (
+          ) : meetingData && meetingData.length > 0 ? (  // Verifique se "meetingData" é um array válido
             <div>
               <p>
                 {new Date(
-                  new Date(meetingData.meetings[0].data_reuniao).setDate(
-                    new Date(meetingData.meetings[0].data_reuniao).getDate() + 1
+                  new Date(meetingData[0].data_reuniao).setDate(
+                    new Date(meetingData[0].data_reuniao).getDate() + 1
                   )
                 ).toLocaleDateString('pt-BR', {
                   day: '2-digit',
@@ -251,7 +219,7 @@ const Home = () => {
                 })}
               </p>
               <ul>
-                {meetingData.meetings.map((meeting, index) => (
+                {meetingData.map((meeting, index) => (  
                   <li key={index} onClick={() => openMeetingDetails(meeting)}>
                     {meeting.pauta}
                   </li>
@@ -265,7 +233,6 @@ const Home = () => {
             </div>
           ) : (
             <div>
-
               <p>Nenhuma reunião encontrada para esta data.</p>
 
               {getDecodedToken()?.papel.trim() === 'Lider' && (
@@ -438,53 +405,14 @@ const Home = () => {
                 placeholder="Selecione os usuários..."
                 value={options.filter(option => selectedUsers.includes(option.value))}
                 onChange={handleUserChange}
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    borderRadius: '8px',
-                    borderColor: '#fff',
-                    boxShadow: 'none',
-                    '&:hover': { borderColor: '#000' },
-                  }),
-                  menu: (base) => ({
-                    ...base,
-                    borderRadius: '8px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                    maxHeight: '200px',
-                    overflowY: 'auto',
-                    display: 'block',
-                  }),
-                  menuList: () => ({
-                    padding: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }),
-                  option: (base, { isFocused, isSelected }) => ({
-                    ...base,
-                    backgroundColor: isSelected ? "#ddd" : isFocused ? "#eee" : "#fff",
-                    color: "#000",
-                    padding: "10px",
-                    textAlign: "left",
-                  }),
-                  multiValueLabel: (base) => ({
-                    ...base,
-                    color: "#000",
-                  }),
-                }}
               />
-
             </div>
             <Botao texto={"+"} className="btAdicionar" type="submit"></Botao>
           </form>
         </DialogContent>
       </Dialog>
-
       <ToastContainer />
-
     </div>
-
   );
-
 };
-
 export default Home;

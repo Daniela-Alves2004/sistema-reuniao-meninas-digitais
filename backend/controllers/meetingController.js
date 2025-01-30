@@ -5,7 +5,6 @@ exports.getMeetingByDate = async (req, res) => {
   
     const { date } = req.query;
 
-
     console.log('date:', date);
 
     try {
