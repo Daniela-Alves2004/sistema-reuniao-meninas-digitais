@@ -136,6 +136,8 @@ export const createMeeting = async (meetingData) => {
 
 // Função para enviar convites para usuários
 export const sendInvitations = async (meetingId, userIds) => {
+    console.log('Enviando convites para:', userIds);
+    console.log('ID da reunião:', meetingId);
     try {
         for (const userId of userIds) {
             await axios.post(`${apiUrl}/invitations/createInvitation`, {
@@ -163,7 +165,7 @@ export const addMinutesToMeeting = async (meetingId, minutesContent, token) => {
         );
         return response.data;
     } catch (error) {
-        console.error('Erro ao adicionar ata:', error);
+        console.error('Erro ao adicionar ata:', error.response || error);
         throw new Error('Erro ao adicionar ata. Tente novamente.');
     }
 };
