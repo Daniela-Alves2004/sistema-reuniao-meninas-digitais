@@ -27,6 +27,7 @@ const Home = () => {
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
   const [showAddMeetingPopup, setShowAddMeetingPopup] = useState(false);
   const [showAddMinutesPopup, setShowAddMinutesPopup] = useState(false);
+  const [meetingMinutes, setMeetingMinutes] = useState([]);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [locations, setLocations] = useState([]);
@@ -71,6 +72,9 @@ const Home = () => {
         ...prevState,
         location: response.data.location,
       }));
+      // Buscar as atas da reunião
+      const minutesResponse = await axios.get(`http://localhost:3000/api/minutes/listMinutesByMeeting/${meeting.id}`);
+      setMeetingMinutes(minutesResponse.data || []);
     } catch (error) {
       console.error('Error fetching meeting location:', error);
       setSelectedMeeting((prevState) => ({
@@ -198,7 +202,7 @@ const Home = () => {
             </div>
           ) : (
             <div>
-              
+
               <p>Nenhuma reunião encontrada para esta data.</p>
 
               {getDecodedToken()?.papel.trim() === 'Lider' && (
@@ -270,6 +274,20 @@ const Home = () => {
                   <strong>Local não disponível.</strong>
                 </p>
               )}
+
+              <div className='divAta'>
+                <h3>Ata da Reunião</h3>
+                {meetingMinutes.length > 0 ? (
+                  <ul>
+                    {meetingMinutes.map((minute, index) => (
+                      <li key={index}>{minute.conteudo}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Nenhuma ata registrada para esta reunião.</p>
+                )}
+              </div>
+
 
               {/* Botão para adicionar ata - Somente para Lideres */}
               {getDecodedToken()?.papel.trim() === 'Lider' && (
