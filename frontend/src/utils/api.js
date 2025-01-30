@@ -169,3 +169,27 @@ export const addMinutesToMeeting = async (meetingId, minutesContent, token) => {
         throw new Error('Erro ao adicionar ata. Tente novamente.');
     }
 };
+
+// Função para buscar os convites de um usuário
+export const getInvitationsByUser = async (userId) => {
+    try {
+        const response = await axios.get(`${apiUrl}/invitations/getInvitationsByUserId/${userId}`);
+        console.log('Convites encontrados:', response.data);
+        return response;
+    } catch (error) {
+        console.error('Erro ao buscar convites:', error);
+        throw new Error('Erro ao buscar convites. Tente novamente.');
+    }
+};
+
+// Função para buscar as reuniões através do id da reunião
+export const getMeetingById = async (meetingId) => {
+    try {
+        const response = await axios.get(`${apiUrl}/meetings/getMeetingById/${meetingId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar reunião:', error);
+        throw new Error('Erro ao buscar reunião. Tente novamente.');
+    }
+};
+
