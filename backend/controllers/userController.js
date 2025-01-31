@@ -46,7 +46,7 @@ exports.loginUser = async (req, res) => {
 
     const token = jwt.sign({ 
       
-      user_id: user.user_id, 
+      id: user.id, 
       ra: user.ra, 
       primeiro_nome: user.primeiro_nome, 
       ultimo_nome: user.ultimo_nome, 
@@ -99,3 +99,47 @@ exports.deleteUser = async (req, res) => {
   }
 
 };
+
+// Função para resgatar todos os usuários
+exports.getAllUsers = async (req, res) => {
+
+  try {
+
+    const users = await User.findAll();
+
+    res.json(users);
+
+  } catch (error) {
+
+    res.status(500).json({ error: error.message });
+
+  }
+
+};
+
+// Função para resgatar um usuário pelo id
+exports.getUserById = async (req, res) => {
+
+  const { id } = req.params;
+
+  try {
+
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ['senha'] }
+    });
+
+    if (!user) {
+
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    }
+
+    res.json(user);
+
+  } catch (error) {
+
+    res.status(500).json({ error: error.message });
+
+  }
+
+}

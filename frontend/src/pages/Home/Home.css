@@ -14,8 +14,8 @@
 }
 
 .react-calendar {
-    width: 70vw ; 
-    height: 70vh ;
+    width: 70vw;
+    height: 70vh;
     border-radius: 20px;
     padding: 40px;
     background-color: #fff;
@@ -24,8 +24,8 @@
 .react-calendar__tile {
     max-width: 100%;
     text-align: center;
-    padding: 20px; 
-    border-radius: 10px; 
+    padding: 20px;
+    border-radius: 10px;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -49,8 +49,8 @@ span {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .react-calendar {
-        width: 90vw ;
-        height: 45vh ;
+        width: 90vw;
+        height: 45vh;
     }
 
     .react-calendar__tile {
@@ -62,8 +62,8 @@ span {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     .react-calendar {
-        width: 80vw ;
-        height: 70vh ;
+        width: 80vw;
+        height: 70vh;
     }
 
     .react-calendar__tile {
@@ -75,8 +75,8 @@ span {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .react-calendar {
-        width: 70vw ;
-        height: 75vh ;
+        width: 70vw;
+        height: 75vh;
     }
 
     .react-calendar__tile {
@@ -88,8 +88,8 @@ span {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .react-calendar {
-        width: 65vw ;
-        height: 75vh ;
+        width: 65vw;
+        height: 75vh;
     }
 
     .react-calendar__tile {
@@ -101,8 +101,8 @@ span {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .react-calendar {
-        width: 80vw ;
-        height: 65vh ;
+        width: 80vw;
+        height: 65vh;
     }
 
     .react-calendar__tile {

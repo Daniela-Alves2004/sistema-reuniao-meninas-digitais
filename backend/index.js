@@ -5,6 +5,7 @@ const userRoutes = require('./routes/userRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const minutesRoutes = require('./routes/minutesRoutes');
+const invitationRoutes = require('./routes/invitationRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config(); // Configura as variáveis de ambiente
@@ -23,6 +24,7 @@ app.use('/api/users', userRoutes); // Rota para usuários
 app.use('/api/meetings', meetingRoutes); // Rota para reuniões
 app.use('/api/locations', locationRoutes); // Rota para locais
 app.use('/api/minutes', minutesRoutes); // Rota para atas
+app.use('/api/invitations', invitationRoutes); // Rota para convites
 
 const PORT = process.env.PORT || 3000; // Porta do servidor
 

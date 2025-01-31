@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logoBranca from '../../assets/logos/logoBranca.png';
-import Botao from '../../componentes/Botao/Botao';
+import Botao from '../../components/Botao/Botao';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';

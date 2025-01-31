@@ -95,3 +95,15 @@ VALUES ('2025-01-30', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos St
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
 VALUES ('2025-01-31', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
+
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (1, 1); -- Brena Santos
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (1, 2); -- João Botter
+
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (2, 1); -- Brena Santos
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (2, 3); -- Rosangela Marquesone
+
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (3, 2); -- João Botter
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (3, 3); -- Rosangela Marquesone
+
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (4, 1); -- Brena Santos
+INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (4, 3); -- Rosangela Marquesone
