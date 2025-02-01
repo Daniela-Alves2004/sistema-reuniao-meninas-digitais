@@ -27,12 +27,9 @@ function Perfil({ exibirSetor = true, exibirBotaoDeletar = true }) {
         <div className="perfil-container-wrapper">
             <Header />
             <div className="titulo-container">
-                <img src={perfilIcon} alt="Ícone de perfil" />
-                <p>Informações do Usuário:</p>
+                <img src={perfilIcon} alt="Ícone de perfil" width={100} height={100}/>
             </div>
             <div className={`perfil-container-dados ${!exibirSetor ? "perfil-container-dados-admin" : ""}`}>
-
-                <div className={`perfil-container-dados-nome ${!exibirSetor ? "perfil-container-dados-nome-admin" : ""}`}>
 
                     {/* Nome */}
                     <label htmlFor="nome-completo">Nome completo:</label>
@@ -44,23 +41,13 @@ function Perfil({ exibirSetor = true, exibirBotaoDeletar = true }) {
                         value={decodedToken.primeiro_nome + " " + decodedToken.ultimo_nome}
                     />
 
-                </div>
-
-                <div className={`perfil-container-dados-email ${!exibirSetor ? "perfil-container-dados-email-admin" : ""}`}>
-
                     {/* Email */}
                     <label htmlFor="email">Email institucional:</label>
                     <input type="email" id="email" name="email" readOnly value={decodedToken.email} />
 
-                </div>
-
-                <div className={`perfil-container-dados-ra ${!exibirSetor ? "perfil-container-dados-ra-admin" : ""}`}>
-
                     {/* RA */}
                     <label htmlFor="registro-aluno">RA:</label>
                     <input type="number" id="registro-aluno" name="registro-aluno" readOnly value={decodedToken.ra} />
-
-                </div>
                 
                 {exibirSetor && (
 

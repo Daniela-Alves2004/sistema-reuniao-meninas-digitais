@@ -4,7 +4,6 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  color: white;
 }
 
 .titulo-container {
@@ -13,16 +12,18 @@
   align-items: center;
   flex-direction: column;
   font-size: 1.5rem;
-  color: white;
   font-weight: bold;
   gap: 10px;
-  width: 20%;
-  height: 25%;
+  color: white;
+  margin: 50px 0;
 }
 
-.titulo-container img {
-  width: 100%;
-  height: 55%;
+.titulo-container img{
+
+  border: 3px solid white;
+  padding: 20px;
+  border-radius: 50%;
+
 }
 
 .perfil-container-dados {
@@ -31,22 +32,32 @@
   gap: 16px;
   align-items: center;
   justify-content: center;
-  width: 45%;
-  height: 25%;
+  border: 2px solid white;
+  padding: 25px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .perfil-container-dados label {
   grid-column: span 2;
   font-weight: bold;
-
+  width: 300px;
+  color: #91327A;
 }
 
 .perfil-container-dados input {
   padding: 10px;
-  background-color: transparent;
-  border: 3px solid white;
-  border-radius: 5px;
+  background-color: #91327A;
+  border-radius: 10px;
+  border: none;
   color: white;
+  width: 300px;
+  font-size: 16px;
+  cursor:unset;
+}
+
+.perfil-container-dados input:focus {
+  outline: none;
 }
 
 .perfil-container-dados-nome,
@@ -101,17 +112,6 @@
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .titulo-container {
-    width: 50%;
-    font-size: 1rem;
-  }
-
-  .perfil-container-dados {
-    width: 70%;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
   .titulo-container {
     width: 50%;
     font-size: 1rem;

@@ -46,6 +46,48 @@ span {
     font-size: 1rem;
 }
 
+
+.MuiAutocomplete-root {
+    width: 100%;
+    color: white;
+}
+
+.MuiAutocomplete-endAdornment {
+    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+}
+
+.MuiAutocomplete-tag {
+    color: white;
+    margin: 5px;
+}
+
+.MuiPopper-root {
+    background-color: white;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.MuiChip-label {
+    color: white;
+}
+
+.user-select-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.MuiAutocomplete-root, .MuiFormControl-root, .MuiInputBase-root{
+
+    border: none !important;
+
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .react-calendar {

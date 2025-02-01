@@ -76,7 +76,13 @@ INSERT INTO "Setor" ("nome") VALUES ('Coordenação');
 
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2465710, 'Brena', 'Santos', 'Lider', 'brenas@gmail.com', '11999999999', 'brena123', 1);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234578, 'João', 'Botter', 'Membro', 'joao@gmail.com', '11999999999', '123456', 2);
-INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234589, 'Rosangela', 'Marquesone', 'Coordenadora', 'rosagenla@gmail.com', '11999999999', '123456', 5);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234589, 'Rosangela', 'Marquesone', 'Coordenadora', 'rosangela@gmail.com', '11999999999', '123456', 5);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2476568, 'Maria Fernanda', 'Aguiar', 'Lider', 'mariaf@gmail.com', '11999999999', 'maria123', 3);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2209977, 'Julia', 'Lucena', 'Lider', 'julial@gmail.com', '11999999999', 'julia123', 4);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2143364, 'Maria Gabriella', 'Victor', 'Lider', 'maga@gmail.com', '11999999999', 'maga123', 1);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2454319, 'Carlos', 'Yamanaka', 'Membro', 'carlosy@gmail.com', '11999999999', 'carlos123', 2);
+INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2410320, 'Mariana', 'de Oliveira', 'Membro', 'marianado@gmail.com', '11999999999', 'mariana123', 3);
+
 
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-123', null);
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-321', null);
@@ -95,15 +101,3 @@ VALUES ('2025-01-30', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos St
 
 INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
 VALUES ('2025-01-31', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);
-
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (1, 1); -- Brena Santos
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (1, 2); -- João Botter
-
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (2, 1); -- Brena Santos
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (2, 3); -- Rosangela Marquesone
-
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (3, 2); -- João Botter
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (3, 3); -- Rosangela Marquesone
-
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (4, 1); -- Brena Santos
-INSERT INTO "Convite" ("id_reuniao", "id_usuario") VALUES (4, 3); -- Rosangela Marquesone
