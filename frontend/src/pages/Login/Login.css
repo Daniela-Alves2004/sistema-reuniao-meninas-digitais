@@ -13,12 +13,6 @@
   justify-content: center;
 }
 
-.login-container-logo img {
-
-  width: 50%;
-  height: auto;
-}
-
 .container-login {
   display: flex;
   flex-direction: column;
@@ -175,7 +169,7 @@ form {
     padding: 50px;
   }
   .login-container-logo img {
-    width: 40%;
+    width: 70%;
   }
   .container-login {
     width: 60%;
