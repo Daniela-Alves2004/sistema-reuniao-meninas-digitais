@@ -5,8 +5,6 @@ exports.getMeetingByDate = async (req, res) => {
   
     const { date } = req.query;
 
-    console.log('date:', date);
-
     try {
 
         const meetings = await Meeting.findAll({
@@ -35,27 +33,22 @@ exports.getMeetingByDate = async (req, res) => {
 
 // Função para buscar reuniões por id
 exports.getMeetingById = async (req, res) => {
-
     const { id } = req.params;
 
     try {
-
-        const meeting = await Meeting.findByPk(id);
+        const meeting = await Meeting.findByPk(id, {
+            include: ['location'] 
+        });
 
         if (!meeting) {
-
             return res.status(404).json({ error: 'Reunião não encontrada' });
-
         }
 
         res.json(meeting);
 
     } catch (error) {
-
         res.status(500).json({ error: error.message });
-
     }
-
 };
 
 // Função para criar reuniões
@@ -68,13 +61,9 @@ exports.createMeeting = async (req, res) => {
         const meeting = await Meeting.create({
 
             data_reuniao,
-
             hora_reuniao,
-
             data_criacao: new Date(),
-
             pauta,
-
             id_local
 
         });

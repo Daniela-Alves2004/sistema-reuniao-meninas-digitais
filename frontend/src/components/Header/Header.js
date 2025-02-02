@@ -52,13 +52,14 @@ function Header() {
       setMeetingDetails(null); // Fecha os detalhes da reunião
       return;
     }
-  
+
     // Limpa os detalhes da reunião antes de buscar novos detalhes
     setMeetingDetails(null);
-  
+
     try {
       const meeting = await getMeetingById(meetingId); // Buscar reunião pelo id
       setMeetingDetails(meeting); // Armazenar os detalhes da reunião no estado
+      console.log("Detalhes da reunião:", meeting);
     } catch (error) {
       console.error("Erro ao buscar reunião:", error);
     }
@@ -82,23 +83,13 @@ function Header() {
           onClick={() => { navigate('/home') }}
         />
 
-        {(getDecodedToken().papel === 'Lider') ? (
-          <img
-            src={user}
-            alt="Ícone de usuário"
-            width={20}
-            height={20}
-            onClick={() => { navigate('/perfil-admin') }}
-          />
-        ) : (
-          <img
-            src={user}
-            alt="Ícone de usuário"
-            width={20}
-            height={20}
-            onClick={() => { navigate('/perfil-usuario') }}
-          />
-        )}
+        <img
+          src={user}
+          alt="Ícone de usuário"
+          width={20}
+          height={20}
+          onClick={() => { navigate('/perfil') }}
+        />
 
         <img
           src={notificationNull}
@@ -133,18 +124,21 @@ function Header() {
             ))}
           </ul>
         )}
-        
+
         {/* Exibe os detalhes da reunião, caso esteja disponível */}
         {meetingDetails && (
           <div className="meeting-details">
             <h5>Detalhes da Reunião</h5>
             <p><strong>Pauta:</strong> {meetingDetails.pauta}</p>
             <p><strong>Data e Hora:</strong> {meetingDetails.data_reuniao}</p>
-            <p><strong>Local:</strong> {meetingDetails.local || 'Local não especificado'}</p>
+            <p><strong>Local:</strong> {meetingDetails.location.sala || meetingDetails.location.link}</p>
           </div>
         )}
       </PopUp>
+
     </header>
+
+
   );
 }
 

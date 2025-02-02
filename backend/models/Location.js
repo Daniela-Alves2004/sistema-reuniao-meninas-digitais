@@ -1,4 +1,3 @@
-// models/Location.js
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
@@ -23,10 +22,15 @@ Location.init({
     allowNull: false
   }
 }, {
+  
   sequelize,
+
   modelName: 'Location', 
+
   tableName: 'Local', 
+
   timestamps: false,
+
 });
 
 module.exports = Location;
