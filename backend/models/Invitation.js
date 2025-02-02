@@ -26,7 +26,7 @@ Invitation.init({
 
         references: {
 
-            model: 'Reuniao',
+            model: 'Meeting',
 
             key: 'id'
 
@@ -42,7 +42,7 @@ Invitation.init({
 
         references: {
 
-            model: 'Usuario',
+            model: 'User',
 
             key: 'id'
 
@@ -54,7 +54,7 @@ Invitation.init({
 
     sequelize,
 
-    modelName: 'Inivitation',
+    modelName: 'Invitation',
 
     tableName: 'Convite',
 

@@ -6,6 +6,8 @@ import PopUp from '../../components/PopUp/PopUp';
 import Calendar from 'react-calendar';
 import { ToastContainer, toast } from 'react-toastify';
 import { getAuthTokenFromCookies, getDecodedToken } from '../../utils/cookies';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import {
   getMeetingsByDate,
   getMeetingDetails,
@@ -18,18 +20,16 @@ import {
   getMeetingMinutes,
   getUserById,
 } from '../../utils/api';
-import Select from 'react-select';
 import './Home.css';
 
 const Home = () => {
-
   const [date, setDate] = useState(new Date());
   const [popupState, setPopupState] = useState(null);
   const [meetingData, setMeetingData] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [users, setUsers] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]); // Armazena os IDs dos usuários selecionados
   const [meetingMinutes, setMeetingMinutes] = useState([]);
   const [error, setError] = useState(null);
 
@@ -37,10 +37,6 @@ const Home = () => {
     value: user.id,
     label: `${user.primeiro_nome} ${user.ultimo_nome}`,
   }));
-
-  const handleUserChange = (selectedOptions) => {
-    setSelectedUsers(selectedOptions.map(option => option.value));
-  };
 
   const handleDateChange = async (newDate) => {
     setDate(newDate);
@@ -230,6 +226,7 @@ const Home = () => {
     </PopUp>
   );
 
+  // Função para renderizar o popup de adicionar ata
   const renderAddMinutesPopup = () => (
     <PopUp isOpen={popupState === 'addMinutes'} onClose={closePopup}>
       <form onSubmit={(e) => handleAddSubmit(e, true)}>
@@ -242,6 +239,7 @@ const Home = () => {
     </PopUp>
   );
 
+  // Função para renderizar o popup de adicionar reunião
   const renderAddMeetingPopup = () => (
     <PopUp isOpen={popupState === 'addMeeting'} onClose={closePopup}>
       <form onSubmit={handleAddSubmit}>
@@ -269,13 +267,33 @@ const Home = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="meetingUsers">Convidar Usuários:</label>
-          <Select
-            id="meetingUsers"
+          <Autocomplete
+            multiple
+            id="user-select"
+            limitTags={2}
             options={userOptions}
-            isMulti
+            getOptionLabel={(option) => option.label}
             value={userOptions.filter(option => selectedUsers.includes(option.value))}
-            onChange={handleUserChange}
+            onChange={(event, newValue) => {
+              setSelectedUsers(newValue.map(option => option.value));
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                placeholder="Selecione os usuários..."
+                variant="outlined"
+                sx={{
+
+                  border: 'none !important',
+
+                }}
+              />
+            )}
+            sx={{
+              '& .MuiAutocomplete-paper': {
+                backgroundColor: '#f0f0f0', // Cor de fundo personalizada
+              },
+            }}
           />
         </div>
         <Botao texto={"Criar Reunião"} className="btAdicionar" type="submit" />
@@ -297,4 +315,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;

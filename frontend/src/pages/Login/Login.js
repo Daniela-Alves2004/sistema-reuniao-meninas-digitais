@@ -132,13 +132,15 @@ const Login = () => {
           </div>
 
           <div className='login-container-botoes'>
+            
             <Botao className="btEntrar" type="submit" texto="Entrar" />
-            <Botao className="btCadastrar" type="button" texto="Cadastrar" onClick={(e) => { e.preventDefault(); navigate('/cadastro')}} />
+
           </div>
+
         </form>
 
-        <p className='login-esqueceu-senha'>Esqueceu a senha?</p>
         <p className='login-saiba-mais'>Clique aqui para saber mais sobre o nosso projeto!</p>
+
       </div>
 
       <ToastContainer />

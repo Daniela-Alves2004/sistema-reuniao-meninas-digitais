@@ -1,5 +1,4 @@
-header{
-
+header {
     border-bottom: 1px solid #e9ecef;
     z-index: 100;
     transition: all 0.3s;
@@ -9,28 +8,49 @@ header{
     border-bottom: 5px solid #e9ecef;
     width: 80vw;
     padding: 20px 0;
-
 }
 
-header .divIcons{
-
+header .divIcons {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 20%;
-
 }
 
-header .divIcons img{
-
+header .divIcons img {
     transition: all 0.3s;
-    margin: 0 0 0 25px  ;
-
+    margin: 0 0 0 25px;
 }
 
-header .divIcons img:hover{
-
+header .divIcons img:hover {
     cursor: pointer;
     transform: scale(1.1);
+}
+
+.invitation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    color: #91327A;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.meeting-details{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    color: #91327A;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
 
 }

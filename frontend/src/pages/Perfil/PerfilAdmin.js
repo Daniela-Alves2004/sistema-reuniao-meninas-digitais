@@ -1,7 +1,7 @@
 import Perfil from "./Perfil";
 
 const PerfilAdmin = () => {
-    return <Perfil exibirSetor={false} exibirBotaoDeletar={false} />;
+    return <Perfil exibirSetor={true} />;
 };
 
 export default PerfilAdmin;

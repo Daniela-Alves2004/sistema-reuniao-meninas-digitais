@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getDecodedToken } from './cookies';
 
 // Defina a URL base da API
 const apiUrl = 'http://localhost:3000/api';
@@ -115,8 +116,16 @@ export const getAllLocations = async () => {
 // Função para buscar todos os usuários
 export const getAllUsers = async () => {
     try {
+        
         const response = await axios.get(`${apiUrl}/users/getAllUsers`);
-        return response.data || [];
+
+        // Filtra o usuário logado da lista de usuários
+        const token = getDecodedToken();
+        const userId = token.id;
+        const users = response.data.filter(user => user.id !== userId);
+
+        return users;
+
     } catch (error) {
         console.error('Erro ao buscar usuários:', error);
         throw new Error('Erro ao buscar usuários. Tente novamente.');
@@ -174,7 +183,6 @@ export const addMinutesToMeeting = async (meetingId, minutesContent, token) => {
 export const getInvitationsByUser = async (userId) => {
     try {
         const response = await axios.get(`${apiUrl}/invitations/getInvitationsByUserId/${userId}`);
-        console.log('Convites encontrados:', response.data);
         return response;
     } catch (error) {
         console.error('Erro ao buscar convites:', error);
@@ -186,6 +194,7 @@ export const getInvitationsByUser = async (userId) => {
 export const getMeetingById = async (meetingId) => {
     try {
         const response = await axios.get(`${apiUrl}/meetings/getMeetingById/${meetingId}`);
+        console.log('Reunião encontrada:', response.data);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar reunião:', error);
