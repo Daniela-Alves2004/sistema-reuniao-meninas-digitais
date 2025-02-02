@@ -183,7 +183,6 @@ export const addMinutesToMeeting = async (meetingId, minutesContent, token) => {
 export const getInvitationsByUser = async (userId) => {
     try {
         const response = await axios.get(`${apiUrl}/invitations/getInvitationsByUserId/${userId}`);
-        console.log('Convites encontrados:', response.data);
         return response;
     } catch (error) {
         console.error('Erro ao buscar convites:', error);
@@ -195,6 +194,7 @@ export const getInvitationsByUser = async (userId) => {
 export const getMeetingById = async (meetingId) => {
     try {
         const response = await axios.get(`${apiUrl}/meetings/getMeetingById/${meetingId}`);
+        console.log('Reunião encontrada:', response.data);
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar reunião:', error);

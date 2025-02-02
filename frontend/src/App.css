@@ -28,10 +28,11 @@ html, body {
 }
 
 .MuiDialogContent-root {
-    background: linear-gradient(180deg, rgba(86, 40, 131, 1) 9%, rgba(145, 50, 122, 1) 65%, rgba(191, 118, 47, 1) 100%);
+    background: #91327A;
     color: white;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
     align-items: center;
     text-align: center;
     justify-content: space-between;

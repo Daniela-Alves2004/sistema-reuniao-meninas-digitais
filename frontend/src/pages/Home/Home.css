@@ -39,11 +39,11 @@
 }
 
 abbr {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 span {
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 
@@ -144,7 +144,7 @@ span {
 @media only screen and (min-width: 1200px) {
     .react-calendar {
         width: 80vw;
-        height: 65vh;
+        height: 75vh;
     }
 
     .react-calendar__tile {

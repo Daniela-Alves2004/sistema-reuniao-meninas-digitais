@@ -1,7 +1,0 @@
-/* Personalização da barra de scroll para Firefox */
-.DialogContent {
-    scrollbar-width: thin;
-    /* Largura da barra de scroll */
-    scrollbar-color: #ff006a transparent;
-    /* Cor do thumb e da trilha */
-}
