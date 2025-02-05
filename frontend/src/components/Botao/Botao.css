@@ -1,4 +1,4 @@
-.btEntrar, .btCadastrar, .btIrParaLogin{
+.btEntrar, .btCadastrar, .btVoltar{
     background-color: white;
     color: #91327A;
     border-radius: 5px;
@@ -8,9 +8,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
-.btEntrar:hover, .btCadastrar:hover, .btIrParaLogin:hover{
+.btEntrar:hover, .btCadastrar:hover, .btVoltar:hover{
     background-color: #91327A;
     color: white;
     cursor: pointer;

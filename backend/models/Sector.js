@@ -35,3 +35,5 @@ Sector.init({
     timestamps: false,
 
 });
+
+module.exports = Sector;

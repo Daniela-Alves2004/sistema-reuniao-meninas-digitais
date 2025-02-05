@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 require('./Cadastro.css');
 
 function Cadastrar() {
-  
+
   const [primeiroNome, setPrimeiroNome] = useState('');
   const [ultimoNome, setUltimoNome] = useState('');
   const [email, setEmail] = useState('');
@@ -34,7 +34,7 @@ function Cadastrar() {
         email: email,
         telefone: telefone,
         ra: ra,
-        senha: senha, 
+        senha: senha,
         papel: papel,
         id_setor: setor,
 
@@ -42,12 +42,14 @@ function Cadastrar() {
 
       console.log('Resposta do cadastro:', response.mensagem);
 
+      console.log('Resposta do cadastro:', response.data);
+
       toast.success('Cadastro bem-sucedido!', {
         autoClose: 1000,
       });
 
       setTimeout(() => {
-        navigate('/');
+        navigate('/perfil');
       }, 3000);
     } catch (error) {
       toast.error('Erro no cadastro. Verifique as informações inseridas.', {
@@ -140,29 +142,29 @@ function Cadastrar() {
                     id='setores'
                     name='setores'
                     onChange={(e) => setSetor(e.target.value)}>
-                      <option disabled value selected>--Setores--</option>
-                      <option value='1'>Marketing</option>
-                      <option value='2'>Gestão de Pessoas</option>
-                      <option value='3'>Conteúdo</option>
-                      <option value='4'>Instrutores</option>
-                      <option value='5'>Professores</option>
+                    <option disabled value selected>Setores</option>
+                    <option value='1'>Marketing</option>
+                    <option value='2'>Gestão de Pessoas</option>
+                    <option value='3'>Conteúdo</option>
+                    <option value='4'>Instrutores</option>
+                    <option value='5'>Professores</option>
                   </select>
                   <select
                     id='papeis'
                     name='papeis'
                     onChange={(e) => setPapel(e.target.value)}>
-                      <option disabled value selected>--Papeis--</option>
-                      <option value='Membro'>Aluna</option>
-                      <option value='Lider'>Lider</option>
-                      <option value='Coordenadora'>Coordenadora</option>
-                    </select>
+                    <option disabled value selected>Papeis</option>
+                    <option value='Membro'>Membro</option>
+                    <option value='Lider'>Lider</option>
+                    <option value='Coordenadora'>Coordenadora</option>
+                  </select>
                 </div>
               </div>
             </div>
             <div className="cadastro-container-botoes">
-              	<Botao className="btIrParaLogin" type="button" texto="Voltar para login" onClick={(e) => { e.preventDefault(); navigate('/'); }} />
+              <Botao className="btVoltar" texto="Voltar" onClick={() => navigate('/perfil')} />
 
-                <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" onClick={() => console.log('Cadastrar-se clicado')} />
+              <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" />
             </div>
 
           </div>
@@ -170,6 +172,7 @@ function Cadastrar() {
       </div>
 
       <ToastContainer />
+
     </div>
   );
 }

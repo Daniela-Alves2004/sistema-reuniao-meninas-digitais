@@ -138,7 +138,7 @@ option{
   height: 40%;
   margin-top: 24px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
   gap: 20px;
 }

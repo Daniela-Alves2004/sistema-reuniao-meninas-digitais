@@ -6,4 +6,6 @@ router.get('/getLocationByMeeting', locationController.getLocationByMeeting);
 
 router.get('/getAllLocations', locationController.getAllLocations);
 
+router.post('/createLocation', locationController.createLocation);
+
 module.exports = router;

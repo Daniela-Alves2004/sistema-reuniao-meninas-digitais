@@ -143,6 +143,28 @@ export const createMeeting = async (meetingData) => {
     }
 };
 
+// Função para criar um local
+export const createLocation = async (locationData) => {
+    try {
+        const response = await axios.post(`${apiUrl}/locations/createLocation`, locationData);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar local:', error);
+        throw new Error('Erro ao criar local. Tente novamente.');
+    }
+};
+
+// Função para criar um setor
+export const createSetor = async (setorData) => {
+    try {
+        const response = await axios.post(`${apiUrl}/sectors/createSector`, setorData);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar setor:', error);
+        throw new Error('Erro ao criar setor. Tente novamente.');
+    }
+};
+
 // Função para enviar convites para usuários
 export const sendInvitations = async (meetingId, userIds) => {
     console.log('Enviando convites para:', userIds);

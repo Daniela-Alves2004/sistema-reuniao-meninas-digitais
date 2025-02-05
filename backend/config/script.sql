@@ -89,15 +89,3 @@ INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.goo
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-231', null);
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K002');
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Presencial', null, 'Sala K003');
-
-INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-28', '14:00', '2025-01-18', 'Estratégias Digitais para 2025: O Futuro do Marketing de Influência e as Tendências Emergentes', 1);
-
-INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-29', '15:00', '2025-01-19', 'Cultura Organizacional: O Papel da Liderança na Criação de Ambientes Inclusivos e Inovadores', 2);
-
-INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-30', '16:00', '2025-01-20', 'Narrativas Visuais: O Poder dos Stories e Vídeos na Construção de Conteúdo Interativo', 3);
-
-INSERT INTO "Reuniao" ("data_reuniao", "hora_reuniao", "data_criacao", "pauta", "id_local") 
-VALUES ('2025-01-31', '17:00', '2025-01-21', 'Gamificação no Ensino: Transformando Aulas em Experiências Interativas e Engajantes', 4);

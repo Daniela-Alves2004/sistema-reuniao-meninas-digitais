@@ -58,3 +58,24 @@ exports.getAllLocations = async (req, res) => {
   }
 
 };
+
+// Função para criar localizações
+exports.createLocation = async (req, res) => {
+
+  const { tipo, link, sala } = req.body;
+
+  try {
+
+    const location = await Location.create({ tipo, link, sala });
+
+    res.status(201).json({ location });
+
+  } catch (error) {
+
+    console.error('Error creating location:', error);
+
+    res.status(400).json({ error: error.message });
+
+  }
+
+};

@@ -15,7 +15,7 @@
   font-weight: bold;
   gap: 10px;
   color: white;
-  margin: 50px 0;
+  margin: 20px 0;
 }
 
 .titulo-container img{
@@ -59,26 +59,31 @@
   outline: none;
 }
 
-.perfil-container-dados-nome,
-.perfil-container-dados-email,
-.perfil-container-dados-ra,
-.perfil-container-dados-setor {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .perfil-container-botoes {
-  width: 30%;
+  
   display: flex;
+  gap: 16px;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
 
 }
 
-.perfil-container-dados-admin {
-  display: flex;
-  flex-direction: column;
-  gap: 16px !important;
+.perfil-container-botoes button {
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  border: none;
+  color: #91327A;
+  width: 300px;
+  cursor: pointer;
+}
+
+.perfil-container-botoes button:hover {
+  background-color: #91327A;
+  color: white;
 }
 
 @media only screen and (max-width: 600px) {
