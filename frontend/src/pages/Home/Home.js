@@ -29,14 +29,37 @@ const Home = () => {
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [users, setUsers] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState([]); // Armazena os IDs dos usuários selecionados
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [meetingMinutes, setMeetingMinutes] = useState([]);
   const [error, setError] = useState(null);
 
-  const userOptions = users.map(user => ({
-    value: user.id,
-    label: `${user.primeiro_nome} ${user.ultimo_nome}`,
-  }));
+  const setores = {
+    1: 'Marketing',
+    2: 'Gestão de Pessoas',
+    3: 'Conteúdo',
+    4: 'Instrutores',
+    5: 'Coordenação',
+  };
+
+  const sectorsWithUsers = users.reduce((acc, user) => {
+    const { id_setor, primeiro_nome, ultimo_nome } = user;
+
+    if (!setores[id_setor]) {
+      console.warn(`Setor com ID ${id_setor} não existe no mapeamento!`);
+      return acc;
+    }
+
+    if (!acc[id_setor]) {
+      acc[id_setor] = { label: setores[id_setor], users: [] };
+    }
+
+    acc[id_setor].users.push({
+      value: user.id,
+      label: `${primeiro_nome} ${ultimo_nome}`,
+    });
+
+    return acc;
+  }, {});
 
   const handleDateChange = async (newDate) => {
     setDate(newDate);
@@ -269,33 +292,39 @@ const Home = () => {
         <div>
           <Autocomplete
             multiple
-            id="user-select"
+            id="sector-user-select"
             limitTags={2}
-            options={userOptions}
+            options={[
+              ...Object.entries(sectorsWithUsers).map(([id_setor, sector]) => ({
+                label: sector.label, // Nome do setor
+                value: `setor_${id_setor}`, // Identificador único para o setor
+                users: sector.users, // Lista de usuários pertencentes ao setor
+                isSector: true, // Marcar como setor
+              })),
+              ...users.map(user => ({
+                value: user.id,
+                label: `${user.primeiro_nome} ${user.ultimo_nome}`,
+                isSector: false, // Marcar como usuário individual
+              }))
+            ]}
             getOptionLabel={(option) => option.label}
-            value={userOptions.filter(option => selectedUsers.includes(option.value))}
             onChange={(event, newValue) => {
-              setSelectedUsers(newValue.map(option => option.value));
+              const selectedUsersFromSectors = newValue.flatMap(option =>
+                option.isSector ? option.users.map(user => user.value) : option.value
+              );
+              setSelectedUsers(selectedUsersFromSectors);
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                placeholder="Selecione os usuários..."
+                placeholder="Selecione os setores ou usuários..."
                 variant="outlined"
-                sx={{
-
-                  border: 'none !important',
-
-                }}
               />
             )}
-            sx={{
-              '& .MuiAutocomplete-paper': {
-                backgroundColor: '#f0f0f0', // Cor de fundo personalizada
-              },
-            }}
           />
         </div>
+
+
         <Botao texto={"Criar Reunião"} className="btAdicionar" type="submit" />
       </form>
     </PopUp>

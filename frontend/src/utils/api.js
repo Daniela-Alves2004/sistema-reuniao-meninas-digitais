@@ -167,8 +167,6 @@ export const createSetor = async (setorData) => {
 
 // Função para enviar convites para usuários
 export const sendInvitations = async (meetingId, userIds) => {
-    console.log('Enviando convites para:', userIds);
-    console.log('ID da reunião:', meetingId);
     try {
         for (const userId of userIds) {
             await axios.post(`${apiUrl}/invitations/createInvitation`, {

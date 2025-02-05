@@ -7,6 +7,7 @@ import PopUp from "../../components/PopUp/PopUp";
 import { createLocation, createSetor } from "../../utils/api";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import Botao from "../../components/Botao/Botao";
 
 
 require("./Perfil.css");
@@ -168,7 +169,7 @@ function Perfil() {
                         disabled={tipoLocal === "Remoto"} // Desabilita se for Remoto
                     />
 
-                    <button type="submit">Adicionar</button>
+                    <Botao type="submit" className="btAdicionar" texto={"Adicionar"}></Botao>
                 </form>
             </PopUp>
 
@@ -178,7 +179,7 @@ function Perfil() {
                 <form onSubmit={handleAddSetor}>
                     <label htmlFor="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" />
-                    <button type="submit">Adicionar</button>
+                    <Botao type="submit" className="btAdicionar" texto={"Adicionar"}></Botao>
                 </form>
             </PopUp>
 

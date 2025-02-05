@@ -46,7 +46,6 @@ span {
     font-size: 1rem;
 }
 
-
 .MuiAutocomplete-root {
     width: 100%;
     color: white;
@@ -86,6 +85,12 @@ span {
 
     border: none !important;
 
+}
+
+.MuiInputBase-root{
+
+    padding: 0 !important;
+    border-color: white !important;
 }
 
 /* Extra small devices (phones, 600px and down) */
