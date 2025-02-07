@@ -107,7 +107,7 @@ function Perfil() {
             <Header />
 
             <div className="titulo-container">
-                <img src={perfilIcon} alt="Ícone de perfil" width={100} height={100} />
+                <img src={perfilIcon} alt="Ícone de perfil" width={70} height={70} />
             </div>
 
             <div className={`perfil-container-dados`}>

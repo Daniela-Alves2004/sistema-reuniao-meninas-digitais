@@ -5,33 +5,32 @@ import notificationNull from '../../assets/icons/notificationNull.svg';
 import exit from '../../assets/icons/exit.svg';
 import home from '../../assets/icons/home.svg';
 import { removeAuthTokenFromCookies, getDecodedToken } from "../../utils/cookies";
-import { getInvitationsByUser } from "../../utils/api";  // Função que busca convites do usuário
-import { getMeetingById } from "../../utils/api";  // Função para buscar as reuniões
+import { getInvitationsByUser } from "../../utils/api"; 
+import { getMeetingById } from "../../utils/api";  
 
-import PopUp from '../PopUp/PopUp'; // Importe o componente PopUp
+import PopUp from '../PopUp/PopUp';
 import './Header.css';
 
 function Header() {
   const navigate = useNavigate();
-  const [invitations, setInvitations] = useState([]); // Estado para armazenar os convites
-  const [showPopup, setShowPopup] = useState(false); // Estado para controlar o pop-up
-  const [loading, setLoading] = useState(false); // Estado de carregamento
-  const [meetingDetails, setMeetingDetails] = useState(null); // Estado para armazenar os detalhes da reunião
+  const [invitations, setInvitations] = useState([]); 
+  const [showPopup, setShowPopup] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const [meetingDetails, setMeetingDetails] = useState(null); 
 
-  // Função para buscar os convites ao montar o componente
   useEffect(() => {
     const fetchInvitations = async () => {
-      setLoading(true); // Inicia o carregamento
+      setLoading(true); 
       const token = getDecodedToken();
       if (token) {
         try {
-          const response = await getInvitationsByUser(token.id); // Função para pegar convites
+          const response = await getInvitationsByUser(token.id); 
           setInvitations(response.data);
         } catch (error) {
           console.error("Erro ao buscar convites:", error);
         }
       }
-      setLoading(false); // Finaliza o carregamento
+      setLoading(false); 
     };
     fetchInvitations();
   }, []);
@@ -47,18 +46,14 @@ function Header() {
   };
 
   const handleInvitationClick = async (meetingId) => {
-    // Se o meetingId for o mesmo que o meetingDetails.id, apenas fecha os detalhes
     if (meetingDetails && meetingDetails.id === meetingId) {
-      setMeetingDetails(null); // Fecha os detalhes da reunião
+      setMeetingDetails(null); 
       return;
     }
-
-    // Limpa os detalhes da reunião antes de buscar novos detalhes
     setMeetingDetails(null);
-
     try {
-      const meeting = await getMeetingById(meetingId); // Buscar reunião pelo id
-      setMeetingDetails(meeting); // Armazenar os detalhes da reunião no estado
+      const meeting = await getMeetingById(meetingId); 
+      setMeetingDetails(meeting); 
       console.log("Detalhes da reunião:", meeting);
     } catch (error) {
       console.error("Erro ao buscar reunião:", error);
@@ -72,8 +67,9 @@ function Header() {
         alt="Logo do projeto de extensão Meninas Digitais na cor branca"
         width={70}
         height={70}
+        onClick={() => { navigate('/home') }}
+        style={{ cursor: 'pointer' }}
       />
-
       <div className="divIcons">
         <img
           src={home}
@@ -82,7 +78,6 @@ function Header() {
           height={30}
           onClick={() => { navigate('/home') }}
         />
-
         <img
           src={user}
           alt="Ícone de usuário"
@@ -90,15 +85,13 @@ function Header() {
           height={20}
           onClick={() => { navigate('/perfil') }}
         />
-
         <img
           src={notificationNull}
           alt="Ícone de notificação"
           width={30}
           height={30}
-          onClick={handleNotificationClick} // Abre o pop-up de convites
+          onClick={handleNotificationClick} 
         />
-
         <img
           src={exit}
           alt="Ícone de sair"
@@ -112,33 +105,30 @@ function Header() {
       <PopUp isOpen={showPopup} onClose={handleNotificationClick}>
         <h4>Convites:</h4>
         {loading ? (
-          <p>Carregando...</p> // Exibe "Carregando..." enquanto os convites estão sendo carregados
+          <p>Carregando...</p>
         ) : invitations.length === 0 ? (
           <p>Você não tem convites.</p>
         ) : (
           <ul>
             {invitations.map((invitation, index) => (
               <li key={index} onClick={() => handleInvitationClick(invitation.id_reuniao)} className="invitation">
-                <p><strong>{invitation.meeting.pauta}</strong> - {invitation.meeting.data_reuniao}</p>
+                <p><strong>{invitation.meeting.pauta}</strong> - {new Date(new Date(invitation.meeting.data_reuniao).setDate(new Date(invitation.meeting.data_reuniao).getDate() + 1)).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</p>
               </li>
             ))}
           </ul>
         )}
 
-        {/* Exibe os detalhes da reunião, caso esteja disponível */}
         {meetingDetails && (
           <div className="meeting-details">
             <h5>Detalhes da Reunião</h5>
             <p><strong>Pauta:</strong> {meetingDetails.pauta}</p>
-            <p><strong>Data e Hora:</strong> {meetingDetails.data_reuniao}</p>
+            <p><strong>Data e Hora:</strong> {new Date(new Date(meetingDetails.data_reuniao).setDate(new Date(meetingDetails.data_reuniao).getDate() + 1)).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</p>
             <p><strong>Local:</strong> {meetingDetails.location.sala || meetingDetails.location.link}</p>
           </div>
         )}
       </PopUp>
 
     </header>
-
-
   );
 }
 

@@ -75,14 +75,11 @@ INSERT INTO "Setor" ("nome") VALUES ('Instrutores');
 INSERT INTO "Setor" ("nome") VALUES ('Coordenação');
 
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2465710, 'Brena', 'Santos', 'Lider', 'brenas@gmail.com', '11999999999', 'brena123', 1);
-INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234578, 'João', 'Botter', 'Membro', 'joao@gmail.com', '11999999999', '123456', 2);
-INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (1234589, 'Rosangela', 'Marquesone', 'Coordenadora', 'rosangela@gmail.com', '11999999999', '123456', 5);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2476568, 'Maria Fernanda', 'Aguiar', 'Lider', 'mariaf@gmail.com', '11999999999', 'maria123', 3);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2209977, 'Julia', 'Lucena', 'Lider', 'julial@gmail.com', '11999999999', 'julia123', 4);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2143364, 'Maria Gabriella', 'Victor', 'Lider', 'maga@gmail.com', '11999999999', 'maga123', 1);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2454319, 'Carlos', 'Yamanaka', 'Membro', 'carlosy@gmail.com', '11999999999', 'carlos123', 2);
 INSERT INTO "Usuario" ("ra", "primeiro_nome", "ultimo_nome", "papel", "email", "telefone", "senha", "id_setor") VALUES (2410320, 'Mariana', 'de Oliveira', 'Membro', 'marianado@gmail.com', '11999999999', 'mariana123', 3);
-
 
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-123', null);
 INSERT INTO "Local" ("tipo", "link", "sala") VALUES ('Remoto', 'https://meet.google.com/abc-321', null);

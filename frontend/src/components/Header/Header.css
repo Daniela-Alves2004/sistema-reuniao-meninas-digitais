@@ -1,11 +1,9 @@
 header {
-    border-bottom: 1px solid #e9ecef;
-    z-index: 100;
     transition: all 0.3s;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid #e9ecef;
+    border-bottom: 2px solid #e9ecef;
     width: 80vw;
     padding: 20px 0;
 }

@@ -41,6 +41,7 @@ const Home = () => {
     5: 'Coordenação',
   };
 
+  // Função para mapear usuários por setor
   const sectorsWithUsers = users.reduce((acc, user) => {
     const { id_setor, primeiro_nome, ultimo_nome } = user;
 
@@ -61,6 +62,9 @@ const Home = () => {
     return acc;
   }, {});
 
+  console.log('sectorsWithUsers:', sectorsWithUsers);
+
+  // Função para buscar reuniões por data
   const handleDateChange = async (newDate) => {
     setDate(newDate);
     setPopupState('popup');
@@ -74,8 +78,10 @@ const Home = () => {
     }
   };
 
+  // Função para fechar o popup
   const closePopup = () => setPopupState(null);
 
+  // Função para abrir o popup de detalhes da reunião
   const openMeetingDetails = async (meeting) => {
     setSelectedMeeting(meeting);
     setPopupState('details');
@@ -103,6 +109,7 @@ const Home = () => {
     }
   };
 
+  // Função para abrir o popup de adicionar reunião
   const handleAddMeetingClick = async () => {
     setPopupState('addMeeting');
     try {
@@ -114,6 +121,7 @@ const Home = () => {
     }
   };
 
+  // Função para adicionar reunião ou ata
   const handleAddSubmit = async (event, isMinutes = false) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -171,7 +179,7 @@ const Home = () => {
         <p>{error}</p>
       ) : meetingData && meetingData.length > 0 ? (
         <div>
-          <p>{new Date(meetingData[0].data_reuniao).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' })}</p>
+          <p>{new Date(meetingData[0].data_reuniao + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' })}</p>
           <ul>
             {meetingData.map((meeting, index) => (
               <li key={index} onClick={() => openMeetingDetails(meeting)}>
