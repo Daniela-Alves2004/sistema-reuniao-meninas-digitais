@@ -32,3 +32,6 @@ services:
         targetPort: 3001
     dependsOn:
       - backend
+    startCommand: |
+      # Esperar o backend iniciar antes de rodar o frontend
+      ./wait-for-it.sh backend:3000 -- npm start
