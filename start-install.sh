@@ -1,24 +1,23 @@
 #!/bin/bash
 
-# Script bash para instalar dependências e abrir dois terminais para executar os servidores
+# Script bash para instalar dependências e iniciar servidores
 
 # Instalar dependências no backend
 echo "Instalando dependências no backend..."
-cd ~/Documentos/GitHub/sistema-reuniao-meninas-digitais/backend
+cd /opt/render/project/src/backend || exit
 npm install
 
 # Instalar dependências no frontend
 echo "Instalando dependências no frontend..."
-cd ../frontend
+cd ../frontend || exit
 npm install
 
-# Voltar para o diretório principal
-cd ..
+# Iniciar backend
+echo "Iniciando backend..."
+cd ../backend || exit
+npm run dev &
 
-# Abrir dois terminais para executar os servidores
-echo "Iniciando servidores em terminais separados..."
-gnome-terminal -- bash -c "cd backend && npm run dev; exec bash"
-sleep 2
-gnome-terminal -- bash -c "cd frontend && npm run dev; exec bash"
-
-echo "Servidores iniciados."
+# Iniciar frontend
+echo "Iniciando frontend..."
+cd ../frontend || exit
+npm run dev &
