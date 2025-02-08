@@ -1,26 +1,23 @@
-# Use a imagem base do Node.js
-FROM node:14
+# frontend/Dockerfile
+FROM node:16
 
-# Defina o diretório de trabalho
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copie o package.json e o package-lock.json
-COPY package*.json /app/
+# Copia o package.json e package-lock.json
+COPY package*.json ./
 
-# Instale as dependências
+# Instala as dependências
 RUN npm install
 
-# Copie o restante do código da aplicação
+# Copia o restante do código, incluindo wait-for-it.sh
 COPY . .
 
-# Construa a aplicação
-RUN npm run build
+# Dá permissão de execução ao wait-for-it.sh
+RUN chmod +x wait-for-it.sh
 
-# Instale o servidor HTTP para servir a aplicação
-RUN npm install -g serve
-
-# Exponha a porta que a aplicação irá rodar
+# Expõe a porta 3000
 EXPOSE 3000
 
-# Comando para iniciar a aplicação
-CMD ["serve", "-s", "build"]
+# Comando para rodar a aplicação
+CMD ["./wait-for-it.sh", "backend:3000", "--", "npm", "start"]
