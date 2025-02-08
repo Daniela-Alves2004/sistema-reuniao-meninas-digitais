@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getDecodedToken } from './cookies';
 
 // Defina a URL base da API
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = process.env.REACT_APP_API_URL + '/api';
 
 export const getMeetingsByDate = async (date) => {
     try {
