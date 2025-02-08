@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.71ecada5.css",
+    "main.js": "/static/js/main.2e542b9e.js",
+    "static/js/488.e75445ad.chunk.js": "/static/js/488.e75445ad.chunk.js",
+    "static/media/logoBranca.png": "/static/media/logoBranca.57b0828e32e38c770cf3.png",
+    "static/media/home.svg": "/static/media/home.d2fce6ee98f70bb0e4ee12cfdd65d978.svg",
+    "index.html": "/index.html",
+    "static/media/notificationNull.svg": "/static/media/notificationNull.e13f342df2555b6e15b57ca12524e92d.svg",
+    "static/media/user.svg": "/static/media/user.918352364669eec8ad20d2b9f91101f4.svg",
+    "static/media/exit.svg": "/static/media/exit.e7ef6bb87e8721097749a9eeddfd6562.svg",
+    "main.71ecada5.css.map": "/static/css/main.71ecada5.css.map",
+    "main.2e542b9e.js.map": "/static/js/main.2e542b9e.js.map",
+    "488.e75445ad.chunk.js.map": "/static/js/488.e75445ad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.71ecada5.css",
+    "static/js/main.2e542b9e.js"
+  ]
+}
