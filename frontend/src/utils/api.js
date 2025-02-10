@@ -4,25 +4,23 @@ import { getDecodedToken } from './cookies';
 // Defina a URL base da API
 const apiUrl = process.env.REACT_APP_API_URL + '/api';
 
+// Função para buscar as reuniões de um usuário
 export const getMeetingsByDate = async (date) => {
     try {
-        // Verifica se o date é um objeto Date válido, senão, converte
         if (!(date instanceof Date)) {
-            date = new Date(date); // Converte a data se não for um objeto Date
+            date = new Date(date);
         }
 
-        // Verifica se a data é válida
         if (isNaN(date.getTime())) {
             throw new Error('Data inválida');
         }
 
-        const formattedDate = date.toISOString().split('T')[0]; // Formata a data para o formato esperado
+        const formattedDate = date.toISOString().split('T')[0]; 
 
         const response = await axios.get(`${apiUrl}/meetings/getMeetingByDate`, {
             params: { date: formattedDate },
         });
 
-        // Aqui, a resposta já contém a lista de reuniões em response.data.meetings
         const meetings = response.data.meetings;
 
         if (meetings && meetings.length > 0) {
@@ -30,7 +28,7 @@ export const getMeetingsByDate = async (date) => {
             return meetings;
         } else {
             console.log('Nenhuma reunião encontrada para esta data.');
-            return []; // Retorna um array vazio caso não haja reuniões
+            return []; 
         }
 
     } catch (error) {
@@ -49,15 +47,15 @@ export const getMeetingDetails = async (meetingId) => {
         });
         const location = locationResponse.data.location;
 
-        const minutesResponse = await getMeetingMinutes(meetingId); // Função corrigida
+        const minutesResponse = await getMeetingMinutes(meetingId); 
         const minutes = minutesResponse.data || [];
 
-        const invitationResponse = await getInvitationsByMeeting(meetingId); // Função corrigida
+        const invitationResponse = await getInvitationsByMeeting(meetingId); 
         const invitedUserIds = invitationResponse.data.map(invitation => invitation.id_usuario);
 
         const usersDetails = await Promise.all(
             invitedUserIds.map(async (userId) => {
-                const userResponse = await getUserById(userId); // Função corrigida
+                const userResponse = await getUserById(userId);
                 return userResponse.data;
             })
         );
@@ -222,3 +220,13 @@ export const getMeetingById = async (meetingId) => {
     }
 };
 
+
+// Função para deletar uma reunião
+export const deleteMeeting = async (meetingId) => {
+    try {
+        await axios.delete(`${apiUrl}/meetings/deleteMeeting/${meetingId}`);
+    } catch (error) {
+        console.error('Erro ao deletar reunião:', error);
+        throw new Error('Erro ao deletar reunião. Tente novamente.');
+    }
+};

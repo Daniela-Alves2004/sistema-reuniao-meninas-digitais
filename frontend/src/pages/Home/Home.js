@@ -19,6 +19,7 @@ import {
   getInvitationsByMeeting,
   getMeetingMinutes,
   getUserById,
+  deleteMeeting
 } from '../../utils/api';
 import './Home.css';
 
@@ -61,8 +62,6 @@ const Home = () => {
 
     return acc;
   }, {});
-
-  console.log('sectorsWithUsers:', sectorsWithUsers);
 
   // Função para buscar reuniões por data
   const handleDateChange = async (newDate) => {
@@ -118,6 +117,20 @@ const Home = () => {
       setUsers(usersResponse || []);
     } catch (error) {
       toast.error('Erro ao buscar dados. Tente novamente mais tarde.');
+    }
+  };
+
+  // Função para deletar reunião
+  const handleDeleteMeeting = async () => {
+    try {
+      await deleteMeeting(selectedMeeting.id);
+      toast.success('Reunião e convites relacionados deletados com sucesso!');
+      closePopup();
+      const response = await getMeetingsByDate(date);
+      setMeetingData(response);
+    } catch (error) {
+      console.error('Erro ao deletar reunião:', error);
+      toast.error('Erro ao deletar reunião. Tente novamente.');
     }
   };
 
@@ -250,6 +263,13 @@ const Home = () => {
               </>
             )}
           </div>
+          {getDecodedToken()?.papel.trim() === 'Lider' && (
+            <Botao
+              texto={"Deletar Reunião"}
+              className="btDeletar"
+              onClick={handleDeleteMeeting}
+            />
+          )}
         </div>
       ) : (
         <p>Detalhes não disponíveis.</p>
@@ -304,15 +324,15 @@ const Home = () => {
             limitTags={2}
             options={[
               ...Object.entries(sectorsWithUsers).map(([id_setor, sector]) => ({
-                label: sector.label, // Nome do setor
-                value: `setor_${id_setor}`, // Identificador único para o setor
-                users: sector.users, // Lista de usuários pertencentes ao setor
-                isSector: true, // Marcar como setor
+                label: sector.label, 
+                value: `setor_${id_setor}`, 
+                users: sector.users,
+                isSector: true, 
               })),
               ...users.map(user => ({
                 value: user.id,
                 label: `${user.primeiro_nome} ${user.ultimo_nome}`,
-                isSector: false, // Marcar como usuário individual
+                isSector: false, 
               }))
             ]}
             getOptionLabel={(option) => option.label}

@@ -1,4 +1,5 @@
 const Meeting = require('../models/Meeting');
+const Invitation = require('../models/Invitation');
 
 // Função para buscar reuniões por data
 exports.getMeetingByDate = async (req, res) => {
@@ -79,3 +80,25 @@ exports.createMeeting = async (req, res) => {
     }
 
 }
+
+// Função para deletar reuniões
+exports.deleteMeeting = async (req, res) => {
+
+    const { id } = req.params;
+  
+    try {
+
+      await Invitation.destroy({ where: { id_reuniao: id } });
+
+      await Meeting.destroy({ where: { id: id } });
+
+     
+      res.status(200).json({ message: 'Reunião e convites relacionados deletados com sucesso.' });
+    } catch (error) {
+     
+        console.error('Erro ao deletar reunião:', error);
+     
+        res.status(500).json({ error: 'Erro ao deletar reunião.' });
+   
+    }
+};

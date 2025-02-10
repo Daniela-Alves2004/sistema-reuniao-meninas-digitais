@@ -81,16 +81,31 @@ span {
     width: 100%;
 }
 
-.MuiAutocomplete-root, .MuiFormControl-root, .MuiInputBase-root{
+.MuiAutocomplete-root,
+.MuiFormControl-root,
+.MuiInputBase-root {
 
     border: none !important;
 
 }
 
-.MuiInputBase-root{
+.MuiInputBase-root {
 
     padding: 0 !important;
     border-color: white !important;
+}
+
+.btDeletar {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btDeletar:hover {
+    background-color: #cc0000;
 }
 
 /* Extra small devices (phones, 600px and down) */
