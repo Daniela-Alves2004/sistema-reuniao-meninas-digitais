@@ -1,32 +1,35 @@
 # Use a imagem base do Node.js
 FROM node:18
 
-# Set working directory
+# Definir o diretório de trabalho
 WORKDIR /app
 
-# Copy package.json and package-lock.json for backend
+# Copiar package.json e package-lock.json para o backend
 COPY backend/package*.json ./backend/
 
-# Install backend dependencies
+# Instalar dependências do backend
 RUN cd backend && npm install --force
 
-# Copy backend code
+# Copiar o código do backend
 COPY backend ./backend
 
-# Copy package.json and package-lock.json for frontend
+# Copiar package.json e package-lock.json para o frontend
 COPY frontend/package*.json ./frontend/
 
-# Install frontend dependencies
+# Instalar dependências do frontend
 RUN cd frontend && npm install --force
 
-# Copy frontend code
+# Copiar o código do frontend
 COPY frontend ./frontend
 
-# Expose ports for backend and frontend
+# Expor portas para backend e frontend
 EXPOSE 3000 3001
 
-# Install concurrently to run both backend and frontend
+# Instalar o `concurrently` globalmente para rodar backend e frontend juntos
 RUN npm install -g concurrently
 
-# Start both backend and frontend
+# Aumentar o limite de memória para evitar falha de build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+# Iniciar tanto o backend quanto o frontend
 CMD ["concurrently", "\"cd backend && npm run dev\"", "\"cd frontend && npm run dev\""]
