@@ -16,8 +16,10 @@ COPY backend ./backend
 # Copiar package.json e package-lock.json para o frontend
 COPY frontend/package*.json ./frontend/
 
-# Instalar dependências do frontend
-RUN cd frontend && npm install --force
+# Limpar cache do npm e instalar dependências do frontend, incluindo o plugin Babel
+RUN cd frontend && npm cache clean --force \
+    && npm install --force \
+    && npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
 # Copiar o código do frontend
 COPY frontend ./frontend
