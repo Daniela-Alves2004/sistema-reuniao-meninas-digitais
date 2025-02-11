@@ -162,13 +162,14 @@ function Cadastrar() {
               </div>
             </div>
             <div className="cadastro-container-botoes">
-              <Botao className="btVoltar" texto="Voltar" onClick={() => navigate('/perfil')} />
-
-              <Botao className="btCadastrar" type="submit" texto="Cadastrar-se" />
+              <Botao className="btCadastrar" type="submit" texto="Cadastrar" />
             </div>
 
           </div>
         </form>
+
+        <Botao className="btVoltar" texto="Voltar" onClick={() => navigate('/perfil')} />
+
       </div>
 
       <ToastContainer />

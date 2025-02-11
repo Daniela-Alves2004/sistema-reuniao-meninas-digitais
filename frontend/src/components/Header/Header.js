@@ -7,7 +7,6 @@ import home from '../../assets/icons/home.svg';
 import { removeAuthTokenFromCookies, getDecodedToken } from "../../utils/cookies";
 import { getInvitationsByUser } from "../../utils/api"; 
 import { getMeetingById } from "../../utils/api";  
-
 import PopUp from '../PopUp/PopUp';
 import './Header.css';
 
@@ -17,6 +16,10 @@ function Header() {
   const [showPopup, setShowPopup] = useState(false); 
   const [loading, setLoading] = useState(false);
   const [meetingDetails, setMeetingDetails] = useState(null); 
+  const [readNotifications, setReadNotifications] = useState(() => {
+    const storedReadNotifications = localStorage.getItem('readNotifications');
+    return storedReadNotifications ? JSON.parse(storedReadNotifications) : [];
+  });
 
   useEffect(() => {
     const fetchInvitations = async () => {
@@ -55,10 +58,20 @@ function Header() {
       const meeting = await getMeetingById(meetingId); 
       setMeetingDetails(meeting); 
       console.log("Detalhes da reunião:", meeting);
+
+      // Marcar a notificação como lida
+      if (!readNotifications.includes(meetingId)) {
+        const updatedReadNotifications = [...readNotifications, meetingId];
+        setReadNotifications(updatedReadNotifications);
+        localStorage.setItem('readNotifications', JSON.stringify(updatedReadNotifications));
+      }
     } catch (error) {
       console.error("Erro ao buscar reunião:", error);
     }
   };
+
+  // Verifica se há notificações não lidas
+  const hasUnreadNotifications = invitations.some(invitation => !readNotifications.includes(invitation.id_reuniao));
 
   return (
     <header>
@@ -91,6 +104,7 @@ function Header() {
           width={30}
           height={30}
           onClick={handleNotificationClick} 
+          style={{ backgroundColor: hasUnreadNotifications ? 'red' : 'transparent' }} 
         />
         <img
           src={exit}
@@ -127,7 +141,6 @@ function Header() {
           </div>
         )}
       </PopUp>
-
     </header>
   );
 }

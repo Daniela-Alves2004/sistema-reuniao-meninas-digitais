@@ -29,6 +29,7 @@ body{
     justify-content: center;
     display: flex !important;
     align-items: center !important;
+    overflow-x: hidden;
 }
 
 .MuiDialogContent-root {
@@ -42,7 +43,7 @@ body{
     justify-content: space-between;
     width: 500px !important; 
     height: auto !important; 
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 .MuiDialogContent-root div p{
@@ -167,8 +168,8 @@ body{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .MuiDialogContent-root {
-        width: 90%;
+    .MuiDialogContent-root{
+        width: 90% !important;
         height: auto;
         box-shadow: none;
     }
@@ -228,7 +229,7 @@ body{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .MuiDialogContent-root {
-        width: 600px;
+        width: 600px ;
         height: 500px;
     }
 
